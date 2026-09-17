@@ -1,0 +1,66 @@
+{
+  "type": "prompt",
+  "request_id": "req_example_tools",
+  "tenant_id": null,
+  "actor": {
+    "type": "user",
+    "id": null,
+    "email_address": null
+  },
+  "source": {
+    "application": "cowork"
+  },
+  "session_id": null,
+  "model": null,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Find the latest budget email."
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_example_1",
+          "tool_name": "search_mail",
+          "input": {
+            "query": "budget"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "content": "Subject: Budget\n[image]",
+          "is_error": false,
+          "tool_name": "search_mail",
+          "tool_use_id": "toolu_example_1"
+        },
+        {
+          "type": "tool_result",
+          "content": "",
+          "is_error": true,
+          "tool_name": null,
+          "tool_use_id": null
+        },
+        {
+          "type": "attachment",
+          "file_name": null,
+          "media_type": "image/png",
+          "size_bytes": 1024,
+          "text": null
+        }
+      ]
+    }
+  ],
+  "metadata": {}
+}

@@ -1,0 +1,5 @@
+{
+  "action": "deny",
+  "deny_reason": "This prompt appears to contain customer payment card data, which your organization's policy does not allow.",
+  "reference_id": "scan_01HXPT4R9V"
+}

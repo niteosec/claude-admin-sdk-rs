@@ -1,0 +1,36 @@
+{
+  "type": "prompt",
+  "request_id": "req_example_future",
+  "tenant_id": "11111111-1111-1111-1111-111111111111",
+  "actor": {
+    "type": "example_future_actor",
+    "example_field": "value"
+  },
+  "source": {
+    "application": "example-new-application"
+  },
+  "session_id": null,
+  "model": "claude-sonnet-4-5",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "example_future_block"
+        },
+        {
+          "type": "example_other_block",
+          "payload": {
+            "nested": [1, 2, 3]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "example_key": "example_value"
+  },
+  "example_top_level_field": {
+    "any": "shape"
+  }
+}

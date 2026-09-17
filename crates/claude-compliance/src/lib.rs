@@ -40,6 +40,9 @@
 
 mod activities;
 mod actor;
+mod groups;
+mod organizations;
+mod settings;
 
 pub use activities::{Activity, ActivityPage, ActivityStream, ComplianceApiAccess, ListActivities, activity_types};
 pub use actor::{
@@ -48,6 +51,21 @@ pub use actor::{
 pub use claude_api_core::{
     ApiClient, ApiError, ApiErrorKind, ApiKey, ApiResponse, ByteStream, ClientConfig, Cursor, CursorPage, Download,
     Error, KeyKind, PageToken, RateLimit, ResponseMeta, Result, RetryPolicy, TokenPage,
+};
+pub use groups::{
+    Group, GroupMember, GroupMemberPage, GroupMemberStream, GroupPage, GroupSourceType, GroupStream, ListGroupMembers,
+    ListGroups,
+};
+pub use organizations::{
+    ListOrganizationUsers, ListOrganizations, ListRolePermissions, ListRoles, Organization, OrganizationPage,
+    OrganizationRole, OrganizationStream, OrganizationUser, OrganizationUserPage, OrganizationUserStream, Role,
+    RolePage, RolePermission, RolePermissionPage, RolePermissionStream, RoleStream,
+};
+pub use settings::{
+    BooleanSetting, BooleanSettingName, ComplianceApiKey, DataRetentionSetting, EffectiveOrganizationSettings,
+    FixedRetention, IndefiniteRetention, IntegerSetting, IntegerSettingName, ProvisioningMode, ProvisioningModeSetting,
+    RetentionPeriod, RetentionTimescale, Setting, StringListSetting, StringListSettingName, StringSetting,
+    StringSettingName,
 };
 
 /// Client for the Compliance API.

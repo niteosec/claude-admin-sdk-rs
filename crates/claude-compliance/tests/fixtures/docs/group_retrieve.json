@@ -1,0 +1,9 @@
+{
+  "id": "rbac_group_01ExampleGroupId000000",
+  "created_at": null,
+  "description": "Example group description",
+  "name": "Example Group",
+  "roles": null,
+  "source_type": "direct",
+  "updated_at": null
+}

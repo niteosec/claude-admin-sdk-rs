@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": "rbac_group_01ExampleGroupId000000",
+      "created_at": "2025-03-12T18:22:41.123456Z",
+      "description": "Example group description",
+      "name": "Example Group",
+      "roles": ["rbac_role_01ExampleRoleId0000000"],
+      "source_type": "scim",
+      "updated_at": "2025-03-14T09:05:17.456789Z"
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

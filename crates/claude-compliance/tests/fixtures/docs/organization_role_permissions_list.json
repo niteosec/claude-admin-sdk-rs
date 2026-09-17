@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "action": "claude_code",
+      "resource_id": "00000000-0000-4000-8000-000000000001",
+      "resource_type": "organization"
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

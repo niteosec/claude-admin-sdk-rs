@@ -1,0 +1,28 @@
+{
+  "type": "effective_organization_settings",
+  "api_keys": [
+    {
+      "type": "compliance_api_key",
+      "id": "apikey_01ExampleKeyId000000",
+      "created_at": "2026-01-02T03:04:05Z",
+      "created_by_id": "user_01ExampleUserId0000000",
+      "is_active": true,
+      "name": "Example key",
+      "scopes": ["read:compliance_org_data"],
+      "expires_at": "2027-01-02T03:04:05Z"
+    }
+  ],
+  "organization_id": "00000000-0000-4000-8000-000000000001",
+  "settings": [
+    {"type": "boolean", "name": "sso_enabled", "value": true},
+    {"type": "integer", "name": "account_session_duration_seconds", "value": null},
+    {"type": "string", "name": "claude_code_default_worker_pool_id", "value": "pool_01Example"},
+    {"type": "string_list", "name": "ip_allowlist_ip_ranges", "value": ["192.0.2.0/24"]},
+    {"type": "provisioning_mode", "name": "sso_provisioning_mode", "value": "scim_advanced"},
+    {
+      "type": "data_retention",
+      "name": "data_retention_periods",
+      "value": {"all": {"type": "fixed", "duration": 90, "timescale": "day"}}
+    }
+  ]
+}

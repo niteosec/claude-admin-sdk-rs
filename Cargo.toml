@@ -5,7 +5,7 @@ members = ["crates/claude-api-core", "crates/claude-compliance"]
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.85"
+rust-version = "1.87"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/niteosec/claude-admin-sdk-rs"
 homepage = "https://github.com/niteosec/claude-admin-sdk-rs"

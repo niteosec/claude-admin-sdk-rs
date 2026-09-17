@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "type": "invite",
+      "id": "invite_01ExampleInvite0000000",
+      "accepted_at": null,
+      "email": "invitee@example.com",
+      "expires_at": "2026-01-22T00:00:00Z",
+      "invited_at": "2026-01-01T00:00:00Z",
+      "rbac_group_ids": [
+        "rbac_group_01ExampleGroup00000"
+      ],
+      "role": "user",
+      "status": "pending"
+    },
+    {
+      "type": "invite",
+      "id": "invite_01ExampleInvite0000002",
+      "accepted_at": "2026-01-02T00:00:00Z",
+      "email": "invitee@example.com",
+      "expires_at": "2026-01-22T00:00:00Z",
+      "invited_at": "2026-01-01T00:00:00Z",
+      "rbac_group_ids": [],
+      "role": "user",
+      "status": "accepted"
+    }
+  ],
+  "first_id": "cursor_first_example",
+  "has_more": false,
+  "last_id": "cursor_last_example"
+}

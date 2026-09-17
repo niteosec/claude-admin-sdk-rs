@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "type": "workspace_member",
+      "user_id": "user_01ExampleUser000000000",
+      "workspace_id": "wrkspc_01ExampleWorkspace000",
+      "workspace_role": "workspace_developer"
+    }
+  ],
+  "first_id": "cursor_first_example",
+  "has_more": false,
+  "last_id": "cursor_last_example"
+}

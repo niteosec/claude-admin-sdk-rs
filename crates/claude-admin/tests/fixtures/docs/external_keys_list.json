@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "type": "external_key",
+      "id": "ekey_01ExampleExternalKey00",
+      "attachment": {
+        "type": "attached"
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "display_name": "example-key",
+      "geo": "us",
+      "provider_config": {
+        "type": "aws",
+        "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/00000000-0000-4000-8000-000000000003",
+        "region": "us-east-1",
+        "role_arn": null
+      },
+      "updated_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "type": "external_key",
+      "id": "ekey_01ExampleExternalKey02",
+      "attachment": {
+        "type": "unattached"
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "display_name": null,
+      "geo": "us",
+      "provider_config": {
+        "type": "gcp",
+        "key_name": "projects/example/locations/us/keyRings/example/cryptoKeys/example"
+      },
+      "updated_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "type": "external_key",
+      "id": "ekey_01ExampleExternalKey03",
+      "attachment": {
+        "type": "attached"
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "display_name": "example-key",
+      "geo": "us",
+      "provider_config": {
+        "type": "azure",
+        "key_name": "example",
+        "tenant_id": "00000000-0000-4000-8000-000000000004",
+        "vault_uri": "https://example.vault.azure.net",
+        "client_id": null
+      },
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "next_page": null
+}

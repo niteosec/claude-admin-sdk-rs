@@ -1,0 +1,136 @@
+{
+  "data": [
+    {
+      "actor": {
+        "type": "user_actor",
+        "deleted": false,
+        "email_address": "user@example.com",
+        "name": "Example User",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "amount": "50000",
+      "currency": "USD",
+      "period": "monthly",
+      "period_to_date_spend": "12050.5",
+      "scope": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "source": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "spend_limit_id": "spl_01ExampleSpendLimit0000"
+    },
+    {
+      "actor": {
+        "type": "user_actor",
+        "deleted": false,
+        "email_address": "user@example.com",
+        "name": "Example User",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "amount": "50000",
+      "currency": "USD",
+      "period": "monthly",
+      "period_to_date_spend": "12050.5",
+      "scope": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "source": {
+        "type": "seat_tier",
+        "seat_tier": "example_tier"
+      },
+      "spend_limit_id": "spl_01ExampleSpendLimit0000"
+    },
+    {
+      "actor": {
+        "type": "user_actor",
+        "deleted": false,
+        "email_address": "user@example.com",
+        "name": "Example User",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "amount": "50000",
+      "currency": "USD",
+      "period": "monthly",
+      "period_to_date_spend": "12050.5",
+      "scope": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "source": {
+        "type": "rbac_group",
+        "rbac_group_id": "rbac_group_01ExampleGroup00000"
+      },
+      "spend_limit_id": "spl_01ExampleSpendLimit0000"
+    },
+    {
+      "actor": {
+        "type": "user_actor",
+        "deleted": false,
+        "email_address": "user@example.com",
+        "name": "Example User",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "amount": "50000",
+      "currency": "USD",
+      "period": "monthly",
+      "period_to_date_spend": "12050.5",
+      "scope": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "source": {
+        "type": "organization_service",
+        "service": "example_service"
+      },
+      "spend_limit_id": "spl_01ExampleSpendLimit0000"
+    },
+    {
+      "actor": {
+        "type": "user_actor",
+        "deleted": false,
+        "email_address": "user@example.com",
+        "name": "Example User",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "amount": "50000",
+      "currency": "USD",
+      "period": "monthly",
+      "period_to_date_spend": "12050.5",
+      "scope": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "source": {
+        "type": "organization"
+      },
+      "spend_limit_id": "spl_01ExampleSpendLimit0000"
+    },
+    {
+      "actor": {
+        "type": "user_actor",
+        "deleted": true,
+        "email_address": null,
+        "name": null,
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "amount": null,
+      "currency": "USD",
+      "period": "daily",
+      "period_to_date_spend": "0",
+      "scope": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "source": {
+        "type": "user",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "spend_limit_id": "spl_01ExampleSpendLimit0000"
+    }
+  ],
+  "next_page": null
+}

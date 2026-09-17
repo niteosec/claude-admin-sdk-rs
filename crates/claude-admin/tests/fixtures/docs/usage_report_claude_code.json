@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "actor": {
+        "type": "user_actor",
+        "email_address": "user@example.com"
+      },
+      "core_metrics": {
+        "commits_by_claude_code": 1,
+        "lines_of_code": {
+          "added": 2,
+          "removed": 3
+        },
+        "num_sessions": 4,
+        "pull_requests_by_claude_code": 5
+      },
+      "customer_type": "subscription",
+      "date": "2026-01-01T00:00:00Z",
+      "is_remote": false,
+      "model_breakdown": [
+        {
+          "estimated_cost": {
+            "amount": 6.5,
+            "currency": "USD"
+          },
+          "model": "claude-example-model",
+          "tokens": {
+            "cache_creation": 7,
+            "cache_read": 8,
+            "input": 9,
+            "output": 10
+          }
+        }
+      ],
+      "organization_id": "00000000-0000-4000-8000-000000000001",
+      "terminal_type": "example-terminal",
+      "tool_actions": {
+        "edit_tool": {
+          "accepted": 11,
+          "rejected": 12
+        }
+      },
+      "subscription_type": "enterprise"
+    },
+    {
+      "actor": {
+        "type": "api_actor",
+        "api_key_name": "Example Key"
+      },
+      "core_metrics": {
+        "commits_by_claude_code": 1,
+        "lines_of_code": {
+          "added": 2,
+          "removed": 3
+        },
+        "num_sessions": 4,
+        "pull_requests_by_claude_code": 5
+      },
+      "customer_type": "api",
+      "date": "2026-01-01T00:00:00Z",
+      "is_remote": true,
+      "model_breakdown": [
+        {
+          "estimated_cost": {
+            "amount": 6.5,
+            "currency": "USD"
+          },
+          "model": "claude-example-model",
+          "tokens": {
+            "cache_creation": 7,
+            "cache_read": 8,
+            "input": 9,
+            "output": 10
+          }
+        }
+      ],
+      "organization_id": "00000000-0000-4000-8000-000000000001",
+      "terminal_type": "example-terminal",
+      "tool_actions": {
+        "edit_tool": {
+          "accepted": 11,
+          "rejected": 12
+        }
+      },
+      "subscription_type": null
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

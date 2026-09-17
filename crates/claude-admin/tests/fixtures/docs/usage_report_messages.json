@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "starting_at": "2026-01-01T00:00:00Z",
+      "ending_at": "2026-01-02T00:00:00Z",
+      "results": [
+        {
+          "account_id": "user_01ExampleUser000000000",
+          "api_key_id": "apikey_01ExampleKey0000000000",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 1,
+            "ephemeral_5m_input_tokens": 2
+          },
+          "cache_read_input_tokens": 3,
+          "context_window": "0-200k",
+          "inference_geo": "global",
+          "model": "claude-example-model",
+          "output_tokens": 4,
+          "server_tool_use": {
+            "web_search_requests": 5
+          },
+          "service_account_id": "svac_01ExampleServiceAcct00",
+          "service_tier": "standard",
+          "uncached_input_tokens": 6,
+          "workspace_id": "wrkspc_01ExampleWorkspace000"
+        }
+      ]
+    },
+    {
+      "starting_at": "2026-01-02T00:00:00Z",
+      "ending_at": "2026-01-03T00:00:00Z",
+      "results": []
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

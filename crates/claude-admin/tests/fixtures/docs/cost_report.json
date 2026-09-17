@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "starting_at": "2026-01-01T00:00:00Z",
+      "ending_at": "2026-01-02T00:00:00Z",
+      "results": [
+        {
+          "amount": "123.45",
+          "context_window": "0-200k",
+          "cost_type": "tokens",
+          "currency": "USD",
+          "description": "Example Model Usage - Input Tokens",
+          "inference_geo": "us",
+          "model": "claude-example-model",
+          "service_tier": "batch",
+          "token_type": "uncached_input_tokens",
+          "workspace_id": "wrkspc_01ExampleWorkspace000"
+        },
+        {
+          "amount": "0.5",
+          "context_window": null,
+          "cost_type": null,
+          "currency": "USD",
+          "description": null,
+          "inference_geo": null,
+          "model": null,
+          "service_tier": null,
+          "token_type": null,
+          "workspace_id": null
+        }
+      ]
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

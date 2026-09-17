@@ -1,0 +1,13 @@
+{
+  "type": "invite",
+  "id": "invite_01ExampleInvite0000000",
+  "accepted_at": null,
+  "email": "invitee@example.com",
+  "expires_at": "2026-01-22T00:00:00Z",
+  "invited_at": "2026-01-01T00:00:00Z",
+  "rbac_group_ids": [
+    "rbac_group_01ExampleGroup00000"
+  ],
+  "role": "user",
+  "status": "pending"
+}

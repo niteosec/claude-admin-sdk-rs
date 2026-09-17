@@ -1,0 +1,8 @@
+{
+  "type": "user",
+  "id": "user_01ExampleUser000000000",
+  "added_at": "2026-01-01T00:00:00Z",
+  "email": "user@example.com",
+  "name": "Example User",
+  "role": "developer"
+}

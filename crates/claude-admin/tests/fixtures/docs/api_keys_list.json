@@ -1,0 +1,66 @@
+{
+  "data": [
+    {
+      "type": "api_key",
+      "id": "apikey_01ExampleKey0000000000",
+      "created_at": "2026-01-01T00:00:00Z",
+      "created_by": {
+        "type": "user",
+        "id": "user_01ExampleUser000000000"
+      },
+      "expires_at": "2027-01-01T00:00:00Z",
+      "name": "Example Key",
+      "partial_key_hint": "sk-ant-api03-Exa...mple",
+      "principal": {
+        "type": "user_actor",
+        "user_id": "user_01ExampleUser000000000"
+      },
+      "scope": {
+        "type": "workspace",
+        "workspace_id": "wrkspc_01ExampleWorkspace000"
+      },
+      "status": "active",
+      "workspace_id": "wrkspc_01ExampleWorkspace000"
+    },
+    {
+      "type": "api_key",
+      "id": "apikey_01ExampleKey0000000002",
+      "created_at": "2026-01-01T00:00:00Z",
+      "created_by": {
+        "type": "service_account",
+        "id": "svac_01ExampleServiceAcct00"
+      },
+      "expires_at": "2027-01-01T00:00:00Z",
+      "name": "Example Key",
+      "partial_key_hint": "sk-ant-api03-Exa...mple",
+      "principal": {
+        "type": "service_account_actor",
+        "service_account_id": "svac_01ExampleServiceAcct00"
+      },
+      "scope": {
+        "type": "organization"
+      },
+      "status": "inactive",
+      "workspace_id": null
+    },
+    {
+      "type": "api_key",
+      "id": "apikey_01ExampleKey0000000003",
+      "created_at": "2026-01-01T00:00:00Z",
+      "created_by": null,
+      "expires_at": null,
+      "name": "Example Key",
+      "partial_key_hint": null,
+      "principal": null,
+      "scope": {
+        "type": "workspace",
+        "workspace_id": "wrkspc_01ExampleWorkspace000"
+      },
+      "status": "archived",
+      "workspace_id": null
+    }
+  ],
+  "first_id": "cursor_first_example",
+  "has_more": false,
+  "last_id": "cursor_last_example"
+}

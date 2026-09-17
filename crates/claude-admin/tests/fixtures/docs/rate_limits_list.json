@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "type": "rate_limit",
+      "id": "rate_limit_example",
+      "group_type": "model_group",
+      "limits": [
+        {
+          "type": "requests_per_minute",
+          "value": 1000
+        }
+      ],
+      "models": [
+        "claude-example-model"
+      ]
+    },
+    {
+      "type": "rate_limit",
+      "id": "rate_limit_example_files",
+      "group_type": "files",
+      "limits": [
+        {
+          "type": "requests_per_minute",
+          "value": 100
+        }
+      ],
+      "models": null
+    }
+  ],
+  "next_page": null
+}

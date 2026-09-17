@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "type": "workspace_rate_limit",
+      "group_type": "model_group",
+      "limits": [
+        {
+          "type": "requests_per_minute",
+          "org_limit": 1000,
+          "value": 100
+        },
+        {
+          "type": "input_tokens_per_minute",
+          "org_limit": null,
+          "value": 10000
+        }
+      ],
+      "models": [
+        "claude-example-model"
+      ],
+      "rate_limit_id": "rate_limit_example",
+      "workspace_id": "wrkspc_01ExampleWorkspace000"
+    },
+    {
+      "type": "workspace_rate_limit",
+      "group_type": "batch",
+      "limits": [
+        {
+          "type": "requests_per_minute",
+          "org_limit": 50,
+          "value": 10
+        }
+      ],
+      "models": null,
+      "rate_limit_id": "rate_limit_example_batch",
+      "workspace_id": "wrkspc_01ExampleWorkspace000"
+    }
+  ],
+  "next_page": null
+}

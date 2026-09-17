@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+      "type": "rbac_role_permission",
+      "action": "chat",
+      "resource": {
+        "type": "organization",
+        "organization_id": "00000000-0000-4000-8000-000000000001"
+      }
+    },
+    {
+      "type": "rbac_role_permission",
+      "action": "use",
+      "resource": {
+        "type": "connector_tool",
+        "connector_id": "connector_example",
+        "tool_name": "example_tool"
+      }
+    },
+    {
+      "type": "rbac_role_permission",
+      "action": "grant",
+      "resource": {
+        "type": "connector_scope",
+        "connector_id": "connector_example",
+        "scope": "example_scope"
+      }
+    },
+    {
+      "type": "rbac_role_permission",
+      "action": "interactive",
+      "resource": {
+        "type": "connector",
+        "connector_id": "connector_example"
+      }
+    },
+    {
+      "type": "rbac_role_permission",
+      "action": "always_allow",
+      "resource": {
+        "type": "all_connectors"
+      }
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

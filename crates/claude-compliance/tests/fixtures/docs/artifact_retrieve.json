@@ -1,0 +1,10 @@
+{
+  "id": "claude_artifact_01ExampleArtifactId0",
+  "artifact_type": "text/markdown",
+  "claude_chat_id": "claude_chat_01ExampleChatId000000",
+  "created_at": "2026-09-01T08:09:11Z",
+  "md5": "00000000000000000000000000000002",
+  "size_bytes": 512,
+  "title": "Example artifact",
+  "version_id": "claude_artifact_version_01ExampleVer0"
+}

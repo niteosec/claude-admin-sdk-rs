@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "type": "user",
+      "granted_at": "2026-08-01T10:00:00Z",
+      "role": "owner",
+      "user_id": "user_01ExampleUserId0000000"
+    },
+    {
+      "type": "group",
+      "granted_at": "2026-08-02T10:00:00Z",
+      "group_id": "group_01ExampleGroupId00000",
+      "role": "editor"
+    },
+    {
+      "type": "organization",
+      "granted_at": "2026-08-03T10:00:00Z",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001",
+      "role": "viewer"
+    },
+    {
+      "type": "organization_role",
+      "granted_at": "2026-08-04T10:00:00Z",
+      "organization_role": "example_role",
+      "role": "admin"
+    }
+  ],
+  "has_more": false,
+  "next_page": null
+}

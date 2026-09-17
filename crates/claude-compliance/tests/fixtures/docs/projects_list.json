@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": "claude_proj_01ExampleProjectId000",
+      "created_at": "2026-08-01T10:00:00Z",
+      "deleted_at": null,
+      "is_private": true,
+      "name": "Example project",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001",
+      "updated_at": "2026-08-15T14:30:00Z",
+      "user": {
+        "id": "user_01ExampleUserId0000000",
+        "email_address": "user@example.com"
+      },
+      "organization_id": "org_01ExampleOrgId00000000"
+    }
+  ],
+  "has_more": true,
+  "next_page": "page-token-example"
+}

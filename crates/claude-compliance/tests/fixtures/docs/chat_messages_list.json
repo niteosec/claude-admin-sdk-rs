@@ -1,0 +1,101 @@
+{
+  "id": "claude_chat_01ExampleChatId000000",
+  "chat_messages": [
+    {
+      "id": "claude_chat_msg_01ExampleMsgId00001",
+      "artifacts": null,
+      "content": [
+        {
+          "type": "text",
+          "text": "Example user text.",
+          "thinking_redacted": false,
+          "truncated": false
+        }
+      ],
+      "created_at": "2026-09-01T08:09:10Z",
+      "files": [
+        {
+          "id": "claude_file_01ExampleFileId000000",
+          "created_at": "2026-09-01T08:09:10Z",
+          "filename": "example.pdf",
+          "md5": "00000000000000000000000000000000",
+          "mime_type": "application/pdf",
+          "size_bytes": 12345
+        }
+      ],
+      "generated_files": null,
+      "role": "user"
+    },
+    {
+      "id": "claude_chat_msg_01ExampleMsgId00002",
+      "artifacts": [
+        {
+          "id": "claude_artifact_01ExampleArtifactId0",
+          "artifact_type": "text/markdown",
+          "title": "Example artifact",
+          "version_id": "claude_artifact_version_01ExampleVer0"
+        }
+      ],
+      "content": [
+        {
+          "type": "text",
+          "text": "Example assistant text.",
+          "thinking_redacted": true,
+          "truncated": false
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01ExampleToolUseId000",
+          "input": "{\"query\":\"example\"}",
+          "integration_name": "Example Integration",
+          "mcp_server_url": "https://mcp.example.com/mcp",
+          "name": "example_search",
+          "truncated": false
+        },
+        {
+          "type": "tool_result",
+          "content": [
+            {
+              "type": "text",
+              "text": "Example tool output."
+            }
+          ],
+          "integration_name": "Example Integration",
+          "is_error": false,
+          "mcp_server_url": "https://mcp.example.com/mcp",
+          "name": "example_search",
+          "tool_use_id": "toolu_01ExampleToolUseId000",
+          "truncated": true
+        }
+      ],
+      "created_at": "2026-09-01T08:09:11Z",
+      "files": null,
+      "generated_files": [
+        {
+          "id": "claude_gen_file_01ExampleGenFileId0",
+          "filename": "example.xlsx",
+          "md5": "00000000000000000000000000000001",
+          "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "size_bytes": 2048
+        }
+      ],
+      "role": "assistant"
+    }
+  ],
+  "created_at": "2026-09-01T08:09:10Z",
+  "deleted_at": null,
+  "first_id": "cursor-first-example",
+  "has_more": false,
+  "href": "https://claude.ai/chat/00000000-0000-4000-8000-000000000002",
+  "last_id": "cursor-last-example",
+  "model": "claude-example-model",
+  "name": "Example chat",
+  "organization_uuid": "00000000-0000-4000-8000-000000000001",
+  "project_id": null,
+  "updated_at": "2026-09-01T08:09:11Z",
+  "user": {
+    "id": "user_01ExampleUserId0000000",
+    "email_address": "user@example.com"
+  },
+  "organization_id": "org_01ExampleOrgId00000000"
+}

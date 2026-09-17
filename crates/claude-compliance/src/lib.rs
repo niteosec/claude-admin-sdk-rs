@@ -40,8 +40,13 @@
 
 mod activities;
 mod actor;
+mod chats;
+mod code;
+mod content_common;
+mod files;
 mod groups;
 mod organizations;
+mod projects;
 mod sessions;
 mod settings;
 
@@ -49,10 +54,20 @@ pub use activities::{Activity, ActivityPage, ActivityStream, ComplianceApiAccess
 pub use actor::{
     Actor, AdminApiKeyActor, AnthropicActor, ApiActor, ScimDirectorySyncActor, UnauthenticatedUserActor, UserActor,
 };
+pub use chats::{
+    Chat, ChatMessage, ChatMessageStream, ChatMessages, ChatOrderBy, ChatPage, ChatStream, ContentBlock,
+    ListChatMessages, ListChats, MessageArtifact, MessageFile, MessageGeneratedFile, MessageOrder, MessageRole,
+    TextBlock, ToolResultBlock, ToolResultItem, ToolResultText, ToolUseBlock,
+};
 pub use claude_api_core::{
     ApiClient, ApiError, ApiErrorKind, ApiKey, ApiResponse, ByteStream, ClientConfig, Cursor, CursorPage, Download,
     Error, KeyKind, PageToken, RateLimit, ResponseMeta, Result, RetryPolicy, TokenPage,
 };
+pub use code::{
+    CodeArtifact, CodeArtifactPage, CodeArtifactReadMode, CodeArtifactStream, CodeArtifactVersion, ListCodeArtifacts,
+};
+pub use content_common::ContentUser;
+pub use files::{Artifact, ChatFile, GeneratedFile};
 pub use groups::{
     Group, GroupMember, GroupMemberPage, GroupMemberStream, GroupPage, GroupSourceType, GroupStream, ListGroupMembers,
     ListGroups,
@@ -62,11 +77,12 @@ pub use organizations::{
     OrganizationRole, OrganizationStream, OrganizationUser, OrganizationUserPage, OrganizationUserStream, Role,
     RolePage, RolePermission, RolePermissionPage, RolePermissionStream, RoleStream,
 };
-pub use settings::{
-    BooleanSetting, BooleanSettingName, ComplianceApiKey, DataRetentionSetting, EffectiveOrganizationSettings,
-    FixedRetention, IndefiniteRetention, IntegerSetting, IntegerSettingName, ProvisioningMode, ProvisioningModeSetting,
-    RetentionPeriod, RetentionTimescale, Setting, StringListSetting, StringListSettingName, StringSetting,
-    StringSettingName,
+pub use projects::{
+    ListProjectAttachments, ListProjectCollaborators, ListProjects, Project, ProjectAttachment, ProjectAttachmentPage,
+    ProjectAttachmentStream, ProjectCollaborator, ProjectCollaboratorPage, ProjectCollaboratorStream, ProjectDetails,
+    ProjectDocAttachment, ProjectDocument, ProjectDocumentMetadata, ProjectFileAttachment, ProjectGroupCollaborator,
+    ProjectOrganizationCollaborator, ProjectOrganizationRoleCollaborator, ProjectPage, ProjectRole, ProjectStream,
+    ProjectUserCollaborator,
 };
 pub use sessions::{
     ContentUnavailable, ContentUnavailableReason, ListLocalSessionMessages, ListLocalSessions,
@@ -76,6 +92,12 @@ pub use sessions::{
     RemoteSessionPage, RemoteSessionStatus, RemoteSessionStream, SessionContentBlock, SessionMessageOrder,
     SessionMessageRole, SessionTextBlock, SessionToolResultBlock, SessionToolResultItem, SessionToolUseBlock,
     SessionUser,
+};
+pub use settings::{
+    BooleanSetting, BooleanSettingName, ComplianceApiKey, DataRetentionSetting, EffectiveOrganizationSettings,
+    FixedRetention, IndefiniteRetention, IntegerSetting, IntegerSettingName, ProvisioningMode, ProvisioningModeSetting,
+    RetentionPeriod, RetentionTimescale, Setting, StringListSetting, StringListSettingName, StringSetting,
+    StringSettingName,
 };
 
 /// Client for the Compliance API.

@@ -1,0 +1,15 @@
+{
+  "id": "claude_proj_01ExampleProjectId000",
+  "attachments_count": 2,
+  "chats_count": 14,
+  "created_at": "2026-08-01T10:00:00Z",
+  "deleted_at": "2026-09-01T00:00:00Z",
+  "description": "Example description",
+  "instructions": "Example instructions.",
+  "is_private": false,
+  "name": "Example project",
+  "organization_uuid": "00000000-0000-4000-8000-000000000001",
+  "updated_at": "2026-08-15T14:30:00Z",
+  "user": null,
+  "organization_id": "org_01ExampleOrgId00000000"
+}

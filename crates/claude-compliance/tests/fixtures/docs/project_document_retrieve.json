@@ -1,0 +1,10 @@
+{
+  "id": "claude_proj_doc_01ExampleDocId00000",
+  "content": "# Example notes\n\n- Item one\n- Item two\n",
+  "created_at": "2026-08-02T10:00:00Z",
+  "filename": "example.txt",
+  "user": {
+    "id": "user_01ExampleUserId0000000",
+    "email_address": "user@example.com"
+  }
+}

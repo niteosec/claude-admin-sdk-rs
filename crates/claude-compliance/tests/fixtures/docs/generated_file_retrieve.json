@@ -1,0 +1,9 @@
+{
+  "id": "claude_gen_file_01ExampleGenFileId0",
+  "claude_chat_id": "claude_chat_01ExampleChatId000000",
+  "created_at": "2026-09-01T08:09:11Z",
+  "filename": "example.xlsx",
+  "md5": "00000000000000000000000000000001",
+  "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "size_bytes": 2048
+}

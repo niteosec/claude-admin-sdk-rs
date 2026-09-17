@@ -1,0 +1,110 @@
+{
+  "data": [
+    {
+      "type": "compliance_local_session_message",
+      "id": "clsm_01ExampleMessage0000001",
+      "content": [],
+      "created_at": "2026-07-09T14:02:11.123456Z",
+      "model": null,
+      "provenance": {
+        "type": "content_unavailable",
+        "reason": "retention_elapsed"
+      },
+      "role": "user"
+    },
+    {
+      "type": "compliance_local_session_message",
+      "id": "clsm_01ExampleMessage0000002",
+      "content": [
+        {
+          "type": "text",
+          "text": "[system prompt was set]",
+          "truncated": true
+        }
+      ],
+      "created_at": "2026-07-09T14:02:12Z",
+      "model": null,
+      "provenance": {
+        "type": "synthetic_marker"
+      },
+      "role": "user"
+    },
+    {
+      "type": "compliance_local_session_message",
+      "id": "clsm_01ExampleMessage0000003",
+      "content": [
+        {
+          "type": "text",
+          "text": "Earlier assistant reply supplied as history.",
+          "truncated": false
+        }
+      ],
+      "created_at": "2026-07-09T14:02:12Z",
+      "model": null,
+      "provenance": {
+        "type": "client_asserted"
+      },
+      "role": "assistant"
+    },
+    {
+      "type": "compliance_local_session_message",
+      "id": "clsm_01ExampleMessage0000004",
+      "content": [
+        {
+          "type": "text",
+          "text": "Checking the example host.",
+          "truncated": false
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_01ExampleToolUse00000",
+          "input": "{\"command\":\"curl https://example.com\"}",
+          "name": "Bash",
+          "truncated": false
+        }
+      ],
+      "created_at": "2026-07-09T14:02:13Z",
+      "model": "claude-example-model",
+      "provenance": null,
+      "role": "assistant"
+    },
+    {
+      "type": "compliance_local_session_message",
+      "id": "clsm_01ExampleMessage0000005",
+      "content": [
+        {
+          "type": "tool_result",
+          "content": [
+            {
+              "type": "text",
+              "text": "<html>Example Domain</html>"
+            }
+          ],
+          "is_error": false,
+          "name": "Bash",
+          "tool_use_id": "toolu_01ExampleToolUse00000",
+          "truncated": true
+        }
+      ],
+      "created_at": "2026-07-09T14:02:14Z",
+      "model": null,
+      "provenance": null,
+      "role": "user"
+    }
+  ],
+  "next_page": null,
+  "session": {
+    "type": "compliance_local_session",
+    "id": "clls_01ExampleLocalSession0001",
+    "created_at": "2026-07-09T14:02:11Z",
+    "organization_uuid": "00000000-0000-4000-8000-000000000001",
+    "product_surface": "claude_code",
+    "truncated": false,
+    "updated_at": "2026-07-09T15:47:33Z",
+    "user": {
+      "id": "user_01ExampleUserId0000000",
+      "email_address": null
+    },
+    "workspace_id": "wrkspc_01ExampleWorkspace000"
+  }
+}

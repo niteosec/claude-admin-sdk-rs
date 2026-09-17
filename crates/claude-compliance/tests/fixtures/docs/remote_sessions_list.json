@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": "cse_01ExampleRemoteSession001",
+      "agent_id": null,
+      "claude_project_id": "claude_proj_01ExampleProject0000",
+      "created_at": "2026-01-02T03:04:05.000000Z",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001",
+      "product_surface": "cowork_remote",
+      "started_by_user": {
+        "id": "user_01ExampleUserId0000000",
+        "email_address": "user@example.com"
+      },
+      "status": "active",
+      "updated_at": "2026-01-02T04:05:06.000000Z",
+      "user": {
+        "id": "user_01ExampleUserId0000000",
+        "email_address": "user@example.com"
+      }
+    },
+    {
+      "id": "cse_01ExampleRemoteSession002",
+      "agent_id": "agent_01ExampleAgent000000",
+      "claude_project_id": null,
+      "created_at": "2026-01-01T03:04:05Z",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001",
+      "product_surface": null,
+      "started_by_user": null,
+      "status": "pending",
+      "updated_at": "2026-01-01T03:04:05Z",
+      "user": null
+    }
+  ],
+  "next_page": null
+}

@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "type": "compliance_local_session",
+      "id": "clls_01ExampleLocalSession0001",
+      "created_at": "2026-07-09T14:02:11Z",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001",
+      "product_surface": "cowork",
+      "truncated": false,
+      "updated_at": "2026-07-09T15:47:33Z",
+      "user": {
+        "id": "user_01ExampleUserId0000000",
+        "email_address": "user@example.com"
+      },
+      "workspace_id": "wrkspc_01ExampleWorkspace000"
+    },
+    {
+      "type": "compliance_local_session",
+      "id": "clls_01ExampleLocalSession0002",
+      "created_at": "2026-07-08T09:00:00Z",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001",
+      "product_surface": null,
+      "truncated": true,
+      "updated_at": "2026-07-08T11:30:00Z",
+      "user": {
+        "id": "user_01ExampleUserId0000001",
+        "email_address": null
+      },
+      "workspace_id": null
+    }
+  ],
+  "next_page": null
+}

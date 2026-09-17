@@ -42,6 +42,7 @@ mod activities;
 mod actor;
 mod groups;
 mod organizations;
+mod sessions;
 mod settings;
 
 pub use activities::{Activity, ActivityPage, ActivityStream, ComplianceApiAccess, ListActivities, activity_types};
@@ -66,6 +67,15 @@ pub use settings::{
     FixedRetention, IndefiniteRetention, IntegerSetting, IntegerSettingName, ProvisioningMode, ProvisioningModeSetting,
     RetentionPeriod, RetentionTimescale, Setting, StringListSetting, StringListSettingName, StringSetting,
     StringSettingName,
+};
+pub use sessions::{
+    ContentUnavailable, ContentUnavailableReason, ListLocalSessionMessages, ListLocalSessions,
+    ListRemoteSessionMessages, ListRemoteSessions, LocalProductSurface, LocalSession, LocalSessionMessage,
+    LocalSessionMessageStream, LocalSessionMessagesPage, LocalSessionPage, LocalSessionStream, Provenance,
+    RemoteProductSurface, RemoteSession, RemoteSessionMessage, RemoteSessionMessageStream, RemoteSessionMessagesPage,
+    RemoteSessionPage, RemoteSessionStatus, RemoteSessionStream, SessionContentBlock, SessionMessageOrder,
+    SessionMessageRole, SessionTextBlock, SessionToolResultBlock, SessionToolResultItem, SessionToolUseBlock,
+    SessionUser,
 };
 
 /// Client for the Compliance API.

@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "id": "csev_01ExampleEvent00000001",
+      "content": [
+        {
+          "type": "text",
+          "text": "Summarise the report on example.com.",
+          "truncated": false
+        }
+      ],
+      "content_unavailable": false,
+      "created_at": "2026-01-02T03:04:06Z",
+      "role": "user",
+      "sent_by_user_id": "user_01ExampleUserId0000000"
+    },
+    {
+      "id": "csev_01ExampleEvent00000002",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": null,
+          "input": "{\"url\":\"https://exam",
+          "name": "web_fetch",
+          "truncated": true
+        },
+        {
+          "type": "tool_result",
+          "content": [
+            {
+              "type": "text",
+              "text": "Example Domain"
+            }
+          ],
+          "is_error": true,
+          "name": "web_fetch",
+          "tool_use_id": null,
+          "truncated": false
+        }
+      ],
+      "content_unavailable": false,
+      "created_at": "2026-01-02T03:04:07Z",
+      "role": "assistant",
+      "sent_by_user_id": null
+    },
+    {
+      "id": "csev_01ExampleEvent00000003",
+      "content": [],
+      "content_unavailable": true,
+      "created_at": "2026-01-02T03:04:08Z",
+      "role": "assistant",
+      "sent_by_user_id": null
+    }
+  ],
+  "next_page": null,
+  "session": {
+    "id": "cse_01ExampleRemoteSession002",
+    "agent_id": "agent_01ExampleAgent000000",
+    "claude_project_id": null,
+    "created_at": "2026-01-01T03:04:05Z",
+    "organization_uuid": "00000000-0000-4000-8000-000000000001",
+    "product_surface": "cowork_remote",
+    "started_by_user": null,
+    "status": "archived",
+    "updated_at": "2026-01-02T03:04:08Z",
+    "user": null
+  }
+}

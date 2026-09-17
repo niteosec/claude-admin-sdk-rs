@@ -24,6 +24,8 @@ saved from the response stream.
 
 ## `docs/` — transcribed from Anthropic's documentation
 
-Shapes not yet observed live. `error_429_rate_limit.json` is the body shown on
+Shapes not yet observed live, hand-built from the API reference pages as fetched on 2026-09-17: every
+documented field, placeholder values only. They cover the directory, settings, content and session
+endpoints. `error_429_rate_limit.json` is the body shown on
 <https://platform.claude.com/docs/en/manage-claude/compliance-errors#429-too-many-requests>. Replace
-with a live capture when one exists.
+each with a live capture when one exists.

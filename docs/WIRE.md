@@ -40,3 +40,56 @@ Key scopes as reported by the server: `api:admin`, `read:compliance_activities`.
 
 Everything that needs a Claude Enterprise Compliance Access Key (directory, settings, chats,
 sessions), the 429 contract (the fixture is from the docs), and pagination at volume.
+
+## Documentation inconsistencies — found building from the reference, 2026-09-17
+
+Not wire observations: places where Anthropic's pages disagree with each other or leave a client
+guessing. Each was resolved in favour of the endpoint's own reference page, leniently; revisit when a
+live capture exists.
+
+### Compliance API
+
+| Where | Inconsistency | Resolution |
+|---|---|---|
+| All reference pages | The header list says `x-api-key`; the curl examples use `Authorization: Bearer`. | `x-api-key` (verified live on the Activity Feed). |
+| `organizations/settings/retrieve` | Path parameter named `organization_id` (a bare UUID); sibling endpoints use `org_uuid`. | Same value; one `&str` argument. |
+| `organizations/list` | `next_page` is "optional string or null"; other lists say "string or null". | `TokenPage` accepts both. |
+| `organizations/list` | Organization `created_at` is described as RFC 3339 but has no `format: date-time`. | Kept as `String`. |
+| `organizations/settings/retrieve` | The row `type` discriminator is marked optional. | A row without it decodes to `Setting::Other` with an empty kind. |
+| Roles, groups, sessions pages | No required scope named; only `manage-claude/admin-api-keys` names `read:compliance_org_data` / `read:compliance_user_data`. | Documented from that guide. |
+| `apps/artifacts/download` | No response body documented, yet `retrieve` says its `md5` matches the `content` field returned by `/content`, implying JSON. | Returned as a raw `Download`. |
+| `apps/chats/list` | Chat and project `organization_id` marked required and deprecated. | `Option<String>`. |
+| `apps/chats/messages/list` | `thinking_redacted`, `truncated`, `has_more` marked required but absent from the page's own example. | `bool`, default `false`. |
+| `apps/sessions/remote/list` | Text says `user_ids[]` takes 1–10 values; the schema only has `maxItems: 10`. | More than 10 rejected; an empty list is not sent. |
+| `apps/sessions/local/*` | The examples omit `truncated` and `next_page`; the remote messages example uses placeholder values such as `"status": "status"`. | Defaults applied. |
+| `apps/sessions/local/messages/list` | `content_unavailable.reason` values given as examples, not a closed set. | Open enum. |
+
+### Analytics API
+
+| Where | Inconsistency | Resolution |
+|---|---|---|
+| `retrieve_summaries` | `ending_date` defaults to "most recent available day + 1" in the description and to today in the parameter text. | Not defaulted client-side. |
+| `manage-claude/analytics-api` vs endpoint pages | The guide says engagement endpoints return a single-day snapshot; the pages also offer date-range rollups. The guide links the reference at `/api/admin/analytics`; the pages live under `/api/beta/organization/analytics`. | Endpoint pages followed. |
+| `users/list` | Says "cursor-based pagination"; the response only has `next_page`. | Page-token pagination. |
+| `plugins/list`, `artifacts/list` | No Enterprise availability line, unlike the other endpoints. | Documented as Enterprise, like the rest of the API. |
+| `chat_projects/list` | Rows carry `product`, but grouping by the `product` dimension is rejected. | Field kept; no client-side check. |
+| Usage and cost reports | Rows allow `inference_geo` `global` / `us`; the filter also accepts `not_available`. | One open enum for both. |
+
+### Admin API
+
+| Where | Inconsistency | Resolution |
+|---|---|---|
+| `spend_limits/increase_requests/*` | Pages sit under `spend_limits/`; the documented path is `/v1/organizations/spend_limit_increase_requests`. | Documented path. |
+| `usage_report/retrieve_messages` | The `speeds[]` filter and `group_by=speed` need the `fast-mode-2026-02-01` beta header. | Setters exist and say so; the transport does not send beta headers. |
+| `rbac_groups/list` | The example shows `has_more: false` together with a non-null `next_page`. | `has_more: false` ends the walk. |
+| Service accounts, federation | "Requires an OAuth access token with the `org:admin` scope … Admin API keys are not accepted." | Not implemented. |
+| MCP tunnels | Deprecated in favour of `/v1/tunnels`; the `anthropic-beta` header is required. | Not implemented. |
+
+### Inference hooks
+
+| Where | Inconsistency | Resolution |
+|---|---|---|
+| `inference-hooks-endpoint` | `metadata` is typed as a string→string object but receivers are told to tolerate its absence and any keys. | Raw JSON map; absent or `null` is empty. |
+| `inference-hooks-endpoint` | Any block field except four may be `null`, although the example always sets `tool_use.id`, `tool_name` and `input`. | Those fields are optional. |
+| Sample verifiers | Go treats an empty header as missing and Python does not; Python accepts an empty key. | Empty headers are missing; an empty key is rejected. |
+| `inference-hooks-configuration` | No request is ever signed with both secrets, so rotation yields one signature from either secret, not two on one request. | `Verifier` accepts any configured secret. |

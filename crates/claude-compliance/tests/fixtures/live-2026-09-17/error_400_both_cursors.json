@@ -1,0 +1,8 @@
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "Cannot specify both 'before_id' and 'after_id' in the same request. Use 'after_id' for forward pagination or 'before_id' for backward pagination."
+  },
+  "request_id": "req_01ExampleRequest0000002"
+}

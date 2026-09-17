@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "actor": {
+        "email_address": "user@example.com",
+        "ip_address": "2001:db8::1",
+        "type": "user_actor",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Safari/605.1.15",
+        "user_id": "user_01ExampleUserId0000000"
+      },
+      "admin_api_key_id": "admin_api_key_01ExampleKeyId000000",
+      "created_at": "2026-09-17T05:48:22.627427Z",
+      "id": "activity_01ExampleActivity0000001",
+      "organization_id": "org_01ExampleOrgId00000000",
+      "scopes": [
+        "api:admin",
+        "read:compliance_activities"
+      ],
+      "type": "admin_api_key_created",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "actor": {
+        "email_address": "user@example.com",
+        "ip_address": "2001:db8::2",
+        "type": "user_actor",
+        "user_agent": "Anthropic/JS 0.124.0",
+        "user_id": "user_01ExampleUserId0000000"
+      },
+      "compliance_api_enabled": true,
+      "compliance_api_logging_enabled": true,
+      "created_at": "2026-09-17T05:35:21.882575Z",
+      "id": "activity_01ExampleActivity0000002",
+      "organization_id": "org_01ExampleOrgId00000000",
+      "type": "org_compliance_api_settings_updated",
+      "organization_uuid": "00000000-0000-4000-8000-000000000001"
+    }
+  ],
+  "has_more": false,
+  "first_id": "eyJpZCI6ICJhY3Rpdml0eV8wMUV4YW1wbGVBY3Rpdml0eTAwMDAwMDEiLCAiY3JlYXRlZF9hdCI6ICIyMDI2LTA5LTE3VDA1OjQ4OjIyLjYyNzQyNyswMDowMCJ9",
+  "last_id": "eyJpZCI6ICJhY3Rpdml0eV8wMUV4YW1wbGVBY3Rpdml0eTAwMDAwMDIiLCAiY3JlYXRlZF9hdCI6ICIyMDI2LTA5LTE3VDA1OjM1OjIxLjg4MjU3NSswMDowMCJ9"
+}

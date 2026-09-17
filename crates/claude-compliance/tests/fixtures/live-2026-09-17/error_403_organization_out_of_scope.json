@@ -1,0 +1,8 @@
+{
+  "type": "error",
+  "error": {
+    "type": "permission_error",
+    "message": "Cannot query compliance data for organizations outside this API key's scope"
+  },
+  "request_id": "req_01ExampleRequest0000009"
+}

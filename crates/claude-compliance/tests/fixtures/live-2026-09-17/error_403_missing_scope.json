@@ -1,0 +1,11 @@
+{
+  "type": "error",
+  "error": {
+    "type": "permission_error",
+    "message": "Missing required scopes. Got: ['api:admin', 'read:compliance_activities'] Needed one of: ['read:compliance_org_data', 'read:org_audit']",
+    "details": {
+      "error_visibility": "user_facing"
+    }
+  },
+  "request_id": "req_01ExampleRequest0000008"
+}

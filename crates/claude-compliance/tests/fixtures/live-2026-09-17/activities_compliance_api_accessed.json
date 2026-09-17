@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "actor": {
+        "api_key_id": "apikey_01ExampleKeyId000000",
+        "ip_address": "192.0.2.10",
+        "type": "api_actor",
+        "user_agent": "curl/8.7.1"
+      },
+      "created_at": "2026-09-17T05:49:01.607448Z",
+      "id": "activity_01ExampleActivity0000003",
+      "organization_id": null,
+      "request_body": null,
+      "request_id": "req_01ExampleRequest0000001",
+      "request_method": "GET",
+      "status_code": 200,
+      "type": "compliance_api_accessed",
+      "url": "https://api.anthropic.com/v1/compliance/activities?limit=5",
+      "organization_uuid": null
+    }
+  ],
+  "has_more": true,
+  "first_id": "eyJpZCI6ICJhY3Rpdml0eV8wMUV4YW1wbGVBY3Rpdml0eTAwMDAwMDMiLCAiY3JlYXRlZF9hdCI6ICIyMDI2LTA5LTE3VDA1OjQ5OjAxLjYwNzQ0OCswMDowMCJ9",
+  "last_id": "eyJpZCI6ICJhY3Rpdml0eV8wMUV4YW1wbGVBY3Rpdml0eTAwMDAwMDMiLCAiY3JlYXRlZF9hdCI6ICIyMDI2LTA5LTE3VDA1OjQ5OjAxLjYwNzQ0OCswMDowMCJ9"
+}

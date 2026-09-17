@@ -1,0 +1,8 @@
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "Unknown query parameter: 'foo'."
+  },
+  "request_id": "req_01ExampleRequest0000004"
+}

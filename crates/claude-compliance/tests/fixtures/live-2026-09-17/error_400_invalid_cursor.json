@@ -1,0 +1,8 @@
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "Invalid activity_id format: 'garbage'"
+  },
+  "request_id": "req_01ExampleRequest0000003"
+}

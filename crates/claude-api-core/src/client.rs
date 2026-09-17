@@ -1,0 +1,179 @@
+//! The HTTP client.
+
+use std::sync::{Arc, Mutex};
+use std::time::Duration;
+
+use jiff::Timestamp;
+use serde::de::DeserializeOwned;
+use tracing::{debug, warn};
+use url::Url;
+
+use crate::config::{ApiKey, ClientConfig, KeyKind};
+use crate::error::{ErrorHeaders, api_error, excerpt};
+use crate::response::{ApiResponse, RateLimit, ResponseMeta, header};
+use crate::{Error, Result};
+
+/// A cheap-to-clone client bound to one API key.
+///
+/// Clones share the connection pool and the rate-limit state. Anthropic's Compliance API budget is
+/// shared per parent organization across every key and endpoint, so share one client per key rather
+/// than creating one per task.
+#[derive(Clone)]
+pub struct ApiClient {
+    http: reqwest::Client,
+    key: ApiKey,
+    config: Arc<ClientConfig>,
+    rate_limit: Arc<Mutex<Option<RateLimit>>>,
+}
+
+impl std::fmt::Debug for ApiClient {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("ApiClient").field("key", &self.key).field("config", &self.config).finish_non_exhaustive()
+    }
+}
+
+impl ApiClient {
+    /// A client with the default configuration.
+    pub fn new(key: ApiKey) -> Result<Self> {
+        Self::with_config(key, ClientConfig::default())
+    }
+
+    /// A client with a custom configuration.
+    pub fn with_config(key: ApiKey, config: ClientConfig) -> Result<Self> {
+        let http = reqwest::Client::builder().timeout(config.timeout).user_agent(config.user_agent.clone()).build()?;
+        Ok(Self::with_http_client(key, config, http))
+    }
+
+    /// A client over a caller-supplied `reqwest::Client` (proxies, custom TLS). The client's own
+    /// timeout and user agent apply; the ones in `config` are not re-applied.
+    pub fn with_http_client(key: ApiKey, config: ClientConfig, http: reqwest::Client) -> Self {
+        Self { http, key, config: Arc::new(config), rate_limit: Arc::new(Mutex::new(None)) }
+    }
+
+    /// The key type, by prefix.
+    pub fn key_kind(&self) -> KeyKind {
+        self.key.kind()
+    }
+
+    /// The most recent rate-limit state reported by the server, if any.
+    pub fn last_rate_limit(&self) -> Option<RateLimit> {
+        *self.rate_limit.lock().expect("rate-limit lock poisoned")
+    }
+
+    /// `GET path?query`, decoded as JSON, with throttling and retries.
+    ///
+    /// `path` is relative to the base URL, without a leading slash (`v1/compliance/activities`).
+    /// Query keys are sent verbatim, so array parameters keep their literal brackets
+    /// (`activity_types[]`); values are percent-encoded.
+    pub async fn get_json<T: DeserializeOwned>(&self, path: &str, query: &[(&str, String)]) -> Result<ApiResponse<T>> {
+        let url = self.url(path, query)?;
+        let retry = &self.config.retry;
+        let mut attempt = 0u32;
+        loop {
+            self.throttle().await;
+            let outcome = self
+                .http
+                .get(url.clone())
+                .header("x-api-key", self.key.expose())
+                .header("anthropic-version", &self.config.anthropic_version)
+                .header(reqwest::header::ACCEPT, "application/json")
+                .send()
+                .await;
+
+            let response = match outcome {
+                Ok(response) => response,
+                Err(error) if attempt < retry.max_retries && (error.is_timeout() || error.is_connect()) => {
+                    let delay = retry.backoff(attempt);
+                    warn!(%url, attempt, ?delay, %error, "transport failure, retrying");
+                    tokio::time::sleep(delay).await;
+                    attempt += 1;
+                    continue;
+                }
+                Err(error) => return Err(error.into()),
+            };
+
+            let status = response.status();
+            let meta = ResponseMeta::from_headers(response.headers());
+            if let Some(rate_limit) = meta.rate_limit {
+                *self.rate_limit.lock().expect("rate-limit lock poisoned") = Some(rate_limit);
+            }
+            let headers = ErrorHeaders {
+                request_id: meta.request_id.clone(),
+                retry_after: header(response.headers(), "retry-after")
+                    .and_then(|value| value.trim().parse::<u64>().ok())
+                    .map(Duration::from_secs),
+                should_retry: header(response.headers(), "x-should-retry").and_then(|value| value.parse::<bool>().ok()),
+            };
+            let body = response.bytes().await?;
+
+            if status.is_success() {
+                return match serde_json::from_slice(&body) {
+                    Ok(body) => Ok(ApiResponse { body, meta }),
+                    Err(source) => {
+                        Err(Error::Decode { source, request_id: meta.request_id, body_excerpt: excerpt(&body) })
+                    }
+                };
+            }
+
+            let error = api_error(status, headers, &body);
+            if attempt < retry.max_retries && error.is_retryable() {
+                let delay = error.retry_after.unwrap_or_else(|| retry.backoff(attempt));
+                warn!(%url, attempt, ?delay, %error, "retryable API error, retrying");
+                tokio::time::sleep(delay).await;
+                attempt += 1;
+                continue;
+            }
+            return Err(error.into());
+        }
+    }
+
+    fn url(&self, path: &str, query: &[(&str, String)]) -> Result<Url> {
+        let mut url = self.config.base_url.join(path)?;
+        if !query.is_empty() {
+            let encoded: Vec<String> = query
+                .iter()
+                .map(|(key, value)| {
+                    format!("{key}={}", url::form_urlencoded::byte_serialize(value.as_bytes()).collect::<String>())
+                })
+                .collect();
+            url.set_query(Some(&encoded.join("&")));
+        }
+        Ok(url)
+    }
+
+    /// Waits for the window reset when the last response reported no requests left.
+    async fn throttle(&self) {
+        let Some(RateLimit { remaining: 0, reset: Some(reset), .. }) = self.last_rate_limit() else {
+            return;
+        };
+        let wait = reset.duration_since(Timestamp::now());
+        if wait.is_positive() {
+            let wait = Duration::try_from(wait).unwrap_or_default().min(self.config.retry.max_backoff);
+            debug!(?wait, "request budget exhausted, waiting for the window to reset");
+            tokio::time::sleep(wait).await;
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn query_keys_stay_literal_and_values_are_encoded() {
+        let client = ApiClient::new(ApiKey::new("sk-ant-api01-test")).unwrap();
+        let url = client
+            .url(
+                "v1/compliance/activities",
+                &[
+                    ("activity_types[]", "claude_chat_created".into()),
+                    ("created_at.gte", "2026-09-17T05:40:00+02:00".into()),
+                ],
+            )
+            .unwrap();
+        assert_eq!(
+            url.as_str(),
+            "https://api.anthropic.com/v1/compliance/activities?activity_types[]=claude_chat_created&created_at.gte=2026-09-17T05%3A40%3A00%2B02%3A00"
+        );
+    }
+}

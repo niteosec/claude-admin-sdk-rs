@@ -3,7 +3,7 @@
 use std::pin::Pin;
 
 use async_stream::try_stream;
-use claude_api_core::{ApiClient, ApiResponse, Cursor, CursorPage, Error, Result};
+use claude_api_core::{ApiClient, ApiPath, ApiResponse, Cursor, CursorPage, Error, Result};
 use futures_core::Stream;
 use jiff::Timestamp;
 use serde::de::DeserializeOwned;
@@ -192,7 +192,7 @@ impl ListActivities {
 
     /// Fetches one page.
     pub async fn send(&self) -> Result<ActivityPage> {
-        self.api.get_json(PATH, &self.query()?).await
+        self.api.get_json(&ApiPath::new(PATH), &self.query()?).await
     }
 
     /// Streams every matching activity, following `last_id` into older pages until `has_more` is

@@ -46,8 +46,8 @@ pub use actor::{
     Actor, AdminApiKeyActor, AnthropicActor, ApiActor, ScimDirectorySyncActor, UnauthenticatedUserActor, UserActor,
 };
 pub use claude_api_core::{
-    ApiClient, ApiError, ApiErrorKind, ApiKey, ApiResponse, ClientConfig, Cursor, CursorPage, Error, KeyKind,
-    RateLimit, ResponseMeta, Result, RetryPolicy,
+    ApiClient, ApiError, ApiErrorKind, ApiKey, ApiResponse, ByteStream, ClientConfig, Cursor, CursorPage, Download,
+    Error, KeyKind, PageToken, RateLimit, ResponseMeta, Result, RetryPolicy, TokenPage,
 };
 
 /// Client for the Compliance API.

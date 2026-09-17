@@ -10,6 +10,7 @@
 //! What it does for every request:
 //!
 //! - sends `x-api-key`, `anthropic-version` and a `user-agent`;
+//! - encodes caller-supplied identifiers as single path segments ([`ApiPath`]);
 //! - throttles before sending when the last response reported an exhausted request budget;
 //! - retries 429, 5xx and transport failures with the documented contract: honour `retry-after`,
 //!   otherwise exponential backoff from 1 s doubling to 60 s, and never retry when the server says
@@ -18,14 +19,19 @@
 
 mod client;
 mod config;
+mod download;
 mod error;
 mod pagination;
+mod path;
 mod response;
+mod string_enum;
 
 pub use client::ApiClient;
 pub use config::{ApiKey, ClientConfig, KeyKind, RetryPolicy};
+pub use download::{ByteStream, Download};
 pub use error::{ApiError, ApiErrorKind, Error};
-pub use pagination::{Cursor, CursorPage};
+pub use pagination::{Cursor, CursorPage, PageToken, TokenPage};
+pub use path::ApiPath;
 pub use response::{ApiResponse, RateLimit, ResponseMeta};
 
 /// Production API origin.
@@ -36,3 +42,8 @@ pub const DEFAULT_ANTHROPIC_VERSION: &str = "2023-06-01";
 
 /// Result alias for this crate and the API crates built on it.
 pub type Result<T, E = Error> = std::result::Result<T, E>;
+
+#[doc(hidden)]
+pub mod __private {
+    pub use serde;
+}

@@ -1,6 +1,6 @@
 [package]
-name = "claude-api-core"
-description = "Unofficial shared transport for Anthropic's organization-level APIs (Compliance, Analytics, Admin): auth, errors, retries, rate limits, cursors"
+name = "claude-analytics"
+description = "Unofficial, read-only Rust client for Anthropic's Claude Enterprise Analytics API"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -9,26 +9,19 @@ repository.workspace = true
 homepage.workspace = true
 authors.workspace = true
 readme = "../../README.md"
-keywords = ["anthropic", "claude", "compliance", "api"]
+keywords = ["anthropic", "claude", "analytics", "enterprise"]
 categories = ["api-bindings", "web-programming::http-client", "asynchronous"]
 
 [dependencies]
-bytes.workspace = true
+async-stream.workspace = true
+claude-api-core.workspace = true
 futures-core.workspace = true
-futures-util.workspace = true
-http.workspace = true
 jiff.workspace = true
-percent-encoding.workspace = true
-reqwest.workspace = true
-secrecy.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-thiserror.workspace = true
-tokio.workspace = true
-tracing.workspace = true
-url.workspace = true
 
 [dev-dependencies]
+futures.workspace = true
 tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
 wiremock.workspace = true
 

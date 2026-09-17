@@ -9,7 +9,9 @@ use tracing::{debug, warn};
 use url::Url;
 
 use crate::config::{ApiKey, ClientConfig, KeyKind};
+use crate::download::Download;
 use crate::error::{ErrorHeaders, api_error, excerpt};
+use crate::path::ApiPath;
 use crate::response::{ApiResponse, RateLimit, ResponseMeta, header};
 use crate::{Error, Result};
 
@@ -62,10 +64,35 @@ impl ApiClient {
 
     /// `GET path?query`, decoded as JSON, with throttling and retries.
     ///
-    /// `path` is relative to the base URL, without a leading slash (`v1/compliance/activities`).
     /// Query keys are sent verbatim, so array parameters keep their literal brackets
-    /// (`activity_types[]`); values are percent-encoded.
-    pub async fn get_json<T: DeserializeOwned>(&self, path: &str, query: &[(&str, String)]) -> Result<ApiResponse<T>> {
+    /// (`activity_types[]`) and nested parameters their dots (`created_at.gte`); values are
+    /// percent-encoded.
+    pub async fn get_json<T: DeserializeOwned>(
+        &self,
+        path: &ApiPath,
+        query: &[(&str, String)],
+    ) -> Result<ApiResponse<T>> {
+        let (response, meta) = self.get(path, query, "application/json").await?;
+        let body = response.bytes().await?;
+        match serde_json::from_slice(&body) {
+            Ok(body) => Ok(ApiResponse { body, meta }),
+            Err(source) => Err(Error::Decode { source, request_id: meta.request_id, body_excerpt: excerpt(&body) }),
+        }
+    }
+
+    /// `GET path?query` for a binary body, with throttling and retries up to the response headers.
+    pub async fn get_download(&self, path: &ApiPath, query: &[(&str, String)]) -> Result<Download> {
+        let (response, meta) = self.get(path, query, "*/*").await?;
+        Ok(Download::new(meta, response))
+    }
+
+    /// Sends a GET and returns the first successful response, retrying per the policy.
+    async fn get(
+        &self,
+        path: &ApiPath,
+        query: &[(&str, String)],
+        accept: &'static str,
+    ) -> Result<(reqwest::Response, ResponseMeta)> {
         let url = self.url(path, query)?;
         let retry = &self.config.retry;
         let mut attempt = 0u32;
@@ -76,7 +103,7 @@ impl ApiClient {
                 .get(url.clone())
                 .header("x-api-key", self.key.expose())
                 .header("anthropic-version", &self.config.anthropic_version)
-                .header(reqwest::header::ACCEPT, "application/json")
+                .header(reqwest::header::ACCEPT, accept)
                 .send()
                 .await;
 
@@ -92,11 +119,15 @@ impl ApiClient {
                 Err(error) => return Err(error.into()),
             };
 
-            let status = response.status();
             let meta = ResponseMeta::from_headers(response.headers());
             if let Some(rate_limit) = meta.rate_limit {
                 *self.rate_limit.lock().expect("rate-limit lock poisoned") = Some(rate_limit);
             }
+            let status = response.status();
+            if status.is_success() {
+                return Ok((response, meta));
+            }
+
             let headers = ErrorHeaders {
                 request_id: meta.request_id.clone(),
                 retry_after: header(response.headers(), "retry-after")
@@ -105,16 +136,6 @@ impl ApiClient {
                 should_retry: header(response.headers(), "x-should-retry").and_then(|value| value.parse::<bool>().ok()),
             };
             let body = response.bytes().await?;
-
-            if status.is_success() {
-                return match serde_json::from_slice(&body) {
-                    Ok(body) => Ok(ApiResponse { body, meta }),
-                    Err(source) => {
-                        Err(Error::Decode { source, request_id: meta.request_id, body_excerpt: excerpt(&body) })
-                    }
-                };
-            }
-
             let error = api_error(status, headers, &body);
             if attempt < retry.max_retries && error.is_retryable() {
                 let delay = error.retry_after.unwrap_or_else(|| retry.backoff(attempt));
@@ -127,8 +148,12 @@ impl ApiClient {
         }
     }
 
-    fn url(&self, path: &str, query: &[(&str, String)]) -> Result<Url> {
-        let mut url = self.config.base_url.join(path)?;
+    fn url(&self, path: &ApiPath, query: &[(&str, String)]) -> Result<Url> {
+        let mut url = self.config.base_url.clone();
+        url.path_segments_mut()
+            .map_err(|()| Error::InvalidArgument(format!("base URL {} cannot carry a path", self.config.base_url)))?
+            .pop_if_empty()
+            .extend(path.segments());
         if !query.is_empty() {
             let encoded: Vec<String> = query
                 .iter()
@@ -159,12 +184,15 @@ impl ApiClient {
 mod tests {
     use super::*;
 
+    fn client() -> ApiClient {
+        ApiClient::new(ApiKey::new("sk-ant-api01-test")).unwrap()
+    }
+
     #[test]
     fn query_keys_stay_literal_and_values_are_encoded() {
-        let client = ApiClient::new(ApiKey::new("sk-ant-api01-test")).unwrap();
-        let url = client
+        let url = client()
             .url(
-                "v1/compliance/activities",
+                &ApiPath::new("v1/compliance/activities"),
                 &[
                     ("activity_types[]", "claude_chat_created".into()),
                     ("created_at.gte", "2026-09-17T05:40:00+02:00".into()),
@@ -175,5 +203,27 @@ mod tests {
             url.as_str(),
             "https://api.anthropic.com/v1/compliance/activities?activity_types[]=claude_chat_created&created_at.gte=2026-09-17T05%3A40%3A00%2B02%3A00"
         );
+    }
+
+    #[test]
+    fn identifiers_are_one_encoded_segment() {
+        let path = ApiPath::new("v1/compliance/apps/chats").id("a/../b?c#d").unwrap().then("messages");
+        let url = client().url(&path, &[]).unwrap();
+        assert_eq!(url.as_str(), "https://api.anthropic.com/v1/compliance/apps/chats/a%2F..%2Fb%3Fc%23d/messages");
+    }
+
+    #[test]
+    fn dot_segments_and_empty_identifiers_are_rejected() {
+        for id in ["", ".", ".."] {
+            assert!(ApiPath::new("v1/x").id(id).is_err(), "{id:?}");
+        }
+    }
+
+    #[test]
+    fn a_base_url_with_a_path_prefix_keeps_it() {
+        let config = ClientConfig::default().with_base_url("https://proxy.example/anthropic/".parse().unwrap());
+        let client = ApiClient::with_config(ApiKey::new("k"), config).unwrap();
+        let url = client.url(&ApiPath::new("v1/compliance/activities"), &[]).unwrap();
+        assert_eq!(url.as_str(), "https://proxy.example/anthropic/v1/compliance/activities");
     }
 }

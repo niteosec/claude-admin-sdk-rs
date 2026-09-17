@@ -35,7 +35,7 @@ impl fmt::Debug for Cursor {
 }
 
 /// A cursor-paginated list: `{data, has_more, first_id, last_id}`.
-#[derive(Debug, Clone, PartialEq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CursorPage<T> {
     /// The records.
     pub data: Vec<T>,
@@ -76,7 +76,7 @@ impl fmt::Debug for PageToken {
 }
 
 /// A page-token list: `{data, has_more?, next_page}`.
-#[derive(Debug, Clone, PartialEq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TokenPage<T> {
     /// The records.
     pub data: Vec<T>,

@@ -232,6 +232,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "claude-managed-agents"
+version = "0.1.0"
+dependencies = [
+ "async-stream",
+ "claude-api-core",
+ "futures",
+ "futures-core",
+ "jiff",
+ "serde",
+ "serde_json",
+ "tokio",
+ "wiremock",
+]
+
+[[package]]
 name = "cmake"
 version = "0.1.58"
 source = "registry+https://github.com/rust-lang/crates.io-index"

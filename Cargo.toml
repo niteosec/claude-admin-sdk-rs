@@ -6,6 +6,7 @@ members = [
     "crates/claude-analytics",
     "crates/claude-admin",
     "crates/claude-inference-hooks",
+    "crates/claude-managed-agents",
 ]
 
 [workspace.package]

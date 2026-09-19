@@ -1,0 +1,1029 @@
+{
+  "data": [
+    {
+      "type": "user.message",
+      "id": "sevt_01ExampleEvent000000001",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "base64",
+            "data": "iVBORw0KGgo=",
+            "media_type": "image/png"
+          }
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "url",
+            "url": "https://example.com/image.png"
+          }
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "file",
+            "file_id": "file_01ExampleFile0000000000"
+          }
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "base64",
+            "data": "JVBERi0=",
+            "media_type": "application/pdf"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "text",
+            "data": "Plain text.",
+            "media_type": "text/plain"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "url",
+            "url": "https://example.com/doc.pdf"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "file",
+            "file_id": "file_01ExampleFile0000000000"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "redacted"
+        }
+      ],
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "user.interrupt",
+      "id": "sevt_01ExampleEvent000000002",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "user.tool_confirmation",
+      "id": "sevt_01ExampleEvent000000003",
+      "result": "deny",
+      "tool_use_id": "sevt_01ExampleEvent000000012",
+      "deny_message": "Not allowed.",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "user.custom_tool_result",
+      "id": "sevt_01ExampleEvent000000004",
+      "custom_tool_use_id": "sevt_01ExampleEvent000000007",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "url",
+            "url": "https://example.com/image.png"
+          }
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "base64",
+            "data": "JVBERi0=",
+            "media_type": "application/pdf"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "search_result",
+          "citations": {
+            "enabled": true
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Result text."
+            }
+          ],
+          "source": "https://example.com/result",
+          "title": "Example result"
+        }
+      ],
+      "is_error": false,
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "user.tool_result",
+      "id": "sevt_01ExampleEvent000000005",
+      "tool_use_id": "sevt_01ExampleEvent000000012",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        }
+      ],
+      "is_error": true,
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "user.define_outcome",
+      "id": "sevt_01ExampleEvent000000006",
+      "description": "Produce summary.md",
+      "max_iterations": 3,
+      "outcome_id": "outc_01ExampleOutcome000000",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "rubric": {
+        "type": "text",
+        "content": "Five sections with citations."
+      }
+    },
+    {
+      "type": "agent.custom_tool_use",
+      "id": "sevt_01ExampleEvent000000007",
+      "input": {
+        "order_id": "1234"
+      },
+      "name": "lookup_order",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "agent.message",
+      "id": "sevt_01ExampleEvent000000008",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "redacted"
+        }
+      ],
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "agent.thinking",
+      "id": "sevt_01ExampleEvent000000009",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "agent.mcp_tool_use",
+      "id": "sevt_01ExampleEvent000000010",
+      "input": {
+        "query": "orders"
+      },
+      "mcp_server_name": "example-mcp",
+      "name": "search_docs",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "evaluated_permission": "ask",
+      "evaluation": {
+        "type": "auto",
+        "evaluated_permission": {
+          "type": "ask",
+          "reason_code": "indeterminate"
+        }
+      },
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "agent.mcp_tool_result",
+      "id": "sevt_01ExampleEvent000000011",
+      "mcp_tool_use_id": "sevt_01ExampleEvent000000010",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "url",
+            "url": "https://example.com/image.png"
+          }
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "base64",
+            "data": "JVBERi0=",
+            "media_type": "application/pdf"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "search_result",
+          "citations": {
+            "enabled": true
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Result text."
+            }
+          ],
+          "source": "https://example.com/result",
+          "title": "Example result"
+        }
+      ],
+      "is_error": false
+    },
+    {
+      "type": "agent.tool_use",
+      "id": "sevt_01ExampleEvent000000012",
+      "input": {
+        "command": "ls"
+      },
+      "name": "bash",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "evaluated_permission": "allow",
+      "evaluation": {
+        "type": "always_allow"
+      },
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "agent.tool_result",
+      "id": "sevt_01ExampleEvent000000013",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "tool_use_id": "sevt_01ExampleEvent000000012",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        }
+      ],
+      "is_error": false
+    },
+    {
+      "type": "agent.thread_message_received",
+      "id": "sevt_01ExampleEvent000000014",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "file",
+            "file_id": "file_01ExampleFile0000000000"
+          }
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "text",
+            "data": "Plain text.",
+            "media_type": "text/plain"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "redacted"
+        }
+      ],
+      "from_session_thread_id": "sthr_01ExampleThread000000002",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "from_agent_name": "Researcher"
+    },
+    {
+      "type": "agent.thread_message_sent",
+      "id": "sevt_01ExampleEvent000000015",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        }
+      ],
+      "processed_at": "2026-09-19T10:00:00Z",
+      "to_session_thread_id": "sthr_01ExampleThread000000002",
+      "to_agent_name": "Researcher"
+    },
+    {
+      "type": "agent.thread_context_compacted",
+      "id": "sevt_01ExampleEvent000000016",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000017",
+      "error": {
+        "type": "unknown_error",
+        "message": "Something failed.",
+        "retry_status": {
+          "type": "retrying"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000018",
+      "error": {
+        "type": "model_overloaded_error",
+        "message": "Overloaded.",
+        "retry_status": {
+          "type": "exhausted"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000019",
+      "error": {
+        "type": "model_rate_limited_error",
+        "message": "Rate limited.",
+        "retry_status": {
+          "type": "terminal"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000020",
+      "error": {
+        "type": "model_request_failed_error",
+        "message": "Failed.",
+        "retry_status": {
+          "type": "retrying"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000021",
+      "error": {
+        "type": "mcp_connection_failed_error",
+        "mcp_server_name": "example-mcp",
+        "message": "Unreachable.",
+        "retry_status": {
+          "type": "retrying"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000022",
+      "error": {
+        "type": "mcp_authentication_failed_error",
+        "mcp_server_name": "example-mcp",
+        "message": "Unauthorized.",
+        "retry_status": {
+          "type": "exhausted"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000023",
+      "error": {
+        "type": "billing_error",
+        "message": "Out of credits.",
+        "retry_status": {
+          "type": "terminal"
+        }
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.error",
+      "id": "sevt_01ExampleEvent000000024",
+      "error": {
+        "type": "credential_host_unreachable_error",
+        "credential_id": "vcrd_01ExampleCredential000",
+        "message": "Host blocked.",
+        "retry_status": {
+          "type": "terminal"
+        },
+        "vault_id": "vlt_01ExampleVault00000000"
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.status_rescheduled",
+      "id": "sevt_01ExampleEvent000000025",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.status_running",
+      "id": "sevt_01ExampleEvent000000026",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.status_idle",
+      "id": "sevt_01ExampleEvent000000027",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "stop_reason": {
+        "type": "requires_action",
+        "event_ids": [
+          "sevt_01ExampleEvent000000010"
+        ]
+      }
+    },
+    {
+      "type": "session.status_idle",
+      "id": "sevt_01ExampleEvent000000028",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "stop_reason": {
+        "type": "end_turn"
+      }
+    },
+    {
+      "type": "session.status_idle",
+      "id": "sevt_01ExampleEvent000000029",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "stop_reason": {
+        "type": "retries_exhausted"
+      }
+    },
+    {
+      "type": "session.status_idle",
+      "id": "sevt_01ExampleEvent000000030",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "stop_reason": {
+        "type": "budget_reached"
+      }
+    },
+    {
+      "type": "session.status_terminated",
+      "id": "sevt_01ExampleEvent000000031",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.thread_created",
+      "id": "sevt_01ExampleEvent000000032",
+      "agent_name": "Researcher",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "span.outcome_evaluation_start",
+      "id": "sevt_01ExampleEvent000000033",
+      "iteration": 0,
+      "outcome_id": "outc_01ExampleOutcome000000",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "span.outcome_evaluation_end",
+      "id": "sevt_01ExampleEvent000000034",
+      "explanation": "Criteria met.",
+      "iteration": 0,
+      "outcome_evaluation_start_id": "sevt_01ExampleEvent000000033",
+      "outcome_id": "outc_01ExampleOutcome000000",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "result": "satisfied",
+      "usage": {
+        "cache_creation_input_tokens": 1,
+        "cache_read_input_tokens": 2,
+        "input_tokens": 3,
+        "output_tokens": 4,
+        "speed": "fast"
+      }
+    },
+    {
+      "type": "span.model_request_start",
+      "id": "sevt_01ExampleEvent000000035",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "span.model_request_end",
+      "id": "sevt_01ExampleEvent000000036",
+      "is_error": false,
+      "model_request_start_id": "sevt_01ExampleEvent000000035",
+      "model_usage": {
+        "cache_creation_input_tokens": 1,
+        "cache_read_input_tokens": 2,
+        "input_tokens": 3,
+        "output_tokens": 4,
+        "speed": "fast"
+      },
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "span.outcome_evaluation_ongoing",
+      "id": "sevt_01ExampleEvent000000037",
+      "iteration": 0,
+      "outcome_id": "outc_01ExampleOutcome000000",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.deleted",
+      "id": "sevt_01ExampleEvent000000038",
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.thread_status_running",
+      "id": "sevt_01ExampleEvent000000039",
+      "agent_name": "Researcher",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "session.thread_status_idle",
+      "id": "sevt_01ExampleEvent000000040",
+      "agent_name": "Researcher",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002",
+      "stop_reason": {
+        "type": "end_turn"
+      }
+    },
+    {
+      "type": "session.thread_status_terminated",
+      "id": "sevt_01ExampleEvent000000041",
+      "agent_name": "Researcher",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "session.thread_status_rescheduled",
+      "id": "sevt_01ExampleEvent000000042",
+      "agent_name": "Researcher",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002"
+    },
+    {
+      "type": "session.updated",
+      "id": "sevt_01ExampleEvent000000043",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "agent": {
+        "type": "agent",
+        "id": "agent_01ExampleAgent000000000",
+        "description": "An example agent.",
+        "mcp_servers": [
+          {
+            "type": "url",
+            "name": "example-mcp",
+            "url": "https://mcp.example.com/sse"
+          }
+        ],
+        "model": {
+          "id": "claude-opus-5",
+          "effort": {
+            "type": "low"
+          },
+          "inference_geo": "us",
+          "speed": "standard"
+        },
+        "multiagent": {
+          "type": "coordinator",
+          "agents": [
+            {
+              "type": "agent",
+              "id": "agent_01ExampleSubagent000000",
+              "description": "A research subagent.",
+              "mcp_servers": [
+                {
+                  "type": "url",
+                  "name": "example-mcp",
+                  "url": "https://mcp.example.com/sse"
+                }
+              ],
+              "model": {
+                "id": "claude-opus-5",
+                "effort": {
+                  "type": "low"
+                },
+                "inference_geo": "us",
+                "speed": "standard"
+              },
+              "name": "Researcher",
+              "skills": [
+                {
+                  "type": "anthropic",
+                  "skill_id": "xlsx",
+                  "version": "1"
+                }
+              ],
+              "system": "You are a research subagent.",
+              "tools": [
+                {
+                  "type": "agent_toolset_20260401",
+                  "configs": [
+                    {
+                      "type": "bash",
+                      "enabled": true,
+                      "name": "bash",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    },
+                    {
+                      "type": "edit",
+                      "enabled": true,
+                      "name": "edit",
+                      "permission_policy": {
+                        "type": "always_ask"
+                      }
+                    },
+                    {
+                      "type": "read",
+                      "enabled": true,
+                      "name": "read",
+                      "permission_policy": {
+                        "type": "auto"
+                      }
+                    },
+                    {
+                      "type": "write",
+                      "enabled": true,
+                      "name": "write",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    },
+                    {
+                      "type": "glob",
+                      "enabled": true,
+                      "name": "glob",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    },
+                    {
+                      "type": "grep",
+                      "enabled": true,
+                      "name": "grep",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      }
+                    },
+                    {
+                      "type": "web_fetch",
+                      "enabled": true,
+                      "name": "web_fetch",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      },
+                      "allowed_domains": [
+                        "example.com"
+                      ],
+                      "blocked_domains": [
+                        "example.net"
+                      ],
+                      "max_content_tokens": 4096
+                    },
+                    {
+                      "type": "web_search",
+                      "enabled": true,
+                      "name": "web_search",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      },
+                      "allowed_domains": [
+                        "example.com"
+                      ],
+                      "blocked_domains": [
+                        "example.net"
+                      ],
+                      "user_location": {
+                        "type": "approximate",
+                        "city": "Example City",
+                        "country": "US",
+                        "region": "Example Region",
+                        "timezone": "America/Los_Angeles"
+                      }
+                    }
+                  ],
+                  "default_config": {
+                    "enabled": true,
+                    "permission_policy": {
+                      "type": "always_ask"
+                    }
+                  }
+                },
+                {
+                  "type": "mcp_toolset",
+                  "configs": [
+                    {
+                      "enabled": true,
+                      "name": "search_docs",
+                      "permission_policy": {
+                        "type": "auto"
+                      }
+                    }
+                  ],
+                  "default_config": {
+                    "enabled": false,
+                    "permission_policy": {
+                      "type": "always_ask"
+                    }
+                  },
+                  "mcp_server_name": "example-mcp"
+                },
+                {
+                  "type": "custom",
+                  "description": "Looks up an order.",
+                  "input_schema": {
+                    "type": "object",
+                    "properties": {
+                      "order_id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "order_id"
+                    ]
+                  },
+                  "name": "lookup_order"
+                }
+              ],
+              "version": 1
+            },
+            {
+              "type": "advisor",
+              "model": "claude-opus-5"
+            }
+          ]
+        },
+        "name": "Example Agent",
+        "skills": [
+          {
+            "type": "anthropic",
+            "skill_id": "xlsx",
+            "version": "1"
+          },
+          {
+            "type": "custom",
+            "skill_id": "skill_01ExampleSkill000000000",
+            "version": "2"
+          }
+        ],
+        "system": "You are an example agent.",
+        "tools": [
+          {
+            "type": "agent_toolset_20260401",
+            "configs": [
+              {
+                "type": "bash",
+                "enabled": true,
+                "name": "bash",
+                "permission_policy": {
+                  "type": "always_allow"
+                }
+              },
+              {
+                "type": "edit",
+                "enabled": true,
+                "name": "edit",
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              {
+                "type": "read",
+                "enabled": true,
+                "name": "read",
+                "permission_policy": {
+                  "type": "auto"
+                }
+              },
+              {
+                "type": "write",
+                "enabled": true,
+                "name": "write",
+                "permission_policy": {
+                  "type": "always_allow"
+                }
+              },
+              {
+                "type": "glob",
+                "enabled": true,
+                "name": "glob",
+                "permission_policy": {
+                  "type": "always_allow"
+                }
+              },
+              {
+                "type": "grep",
+                "enabled": true,
+                "name": "grep",
+                "permission_policy": {
+                  "type": "always_allow"
+                }
+              },
+              {
+                "type": "web_fetch",
+                "enabled": true,
+                "name": "web_fetch",
+                "permission_policy": {
+                  "type": "always_allow"
+                },
+                "allowed_domains": [
+                  "example.com"
+                ],
+                "blocked_domains": [
+                  "example.net"
+                ],
+                "max_content_tokens": 4096
+              },
+              {
+                "type": "web_search",
+                "enabled": true,
+                "name": "web_search",
+                "permission_policy": {
+                  "type": "always_allow"
+                },
+                "allowed_domains": [
+                  "example.com"
+                ],
+                "blocked_domains": [
+                  "example.net"
+                ],
+                "user_location": {
+                  "type": "approximate",
+                  "city": "Example City",
+                  "country": "US",
+                  "region": "Example Region",
+                  "timezone": "America/Los_Angeles"
+                }
+              }
+            ],
+            "default_config": {
+              "enabled": true,
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            }
+          },
+          {
+            "type": "mcp_toolset",
+            "configs": [
+              {
+                "enabled": true,
+                "name": "search_docs",
+                "permission_policy": {
+                  "type": "auto"
+                }
+              }
+            ],
+            "default_config": {
+              "enabled": false,
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            "mcp_server_name": "example-mcp"
+          },
+          {
+            "type": "custom",
+            "description": "Looks up an order.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "order_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "order_id"
+              ]
+            },
+            "name": "lookup_order"
+          }
+        ],
+        "version": 3
+      },
+      "budget": {
+        "type": "limit",
+        "max_list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        }
+      },
+      "metadata": {
+        "ticket": "example-2"
+      },
+      "title": "Renamed session"
+    },
+    {
+      "type": "system.message",
+      "id": "sevt_01ExampleEvent000000044",
+      "content": [
+        {
+          "type": "text",
+          "text": "Answer in French."
+        }
+      ],
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.usage",
+      "id": "sevt_01ExampleEvent000000045",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "usage": {
+        "active_seconds": 12.5,
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10,
+          "ephemeral_5m_input_tokens": 20
+        },
+        "cache_read_input_tokens": 30,
+        "input_tokens": 40,
+        "list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "output_tokens": 50,
+        "server_tool_use": {
+          "web_fetch_requests": 1,
+          "web_search_requests": 2
+        }
+      },
+      "budget": {
+        "type": "limit",
+        "max_list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        }
+      }
+    },
+    {
+      "type": "agent.tool_use",
+      "id": "sevt_01ExampleEvent000000046",
+      "input": {},
+      "name": "web_fetch",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "evaluated_permission": "deny",
+      "evaluation": {
+        "type": "auto",
+        "evaluated_permission": {
+          "type": "deny",
+          "reason_code": "high_risk"
+        }
+      },
+      "session_thread_id": null
+    },
+    {
+      "type": "agent.mcp_tool_use",
+      "id": "sevt_01ExampleEvent000000047",
+      "input": {},
+      "mcp_server_name": "example-mcp",
+      "name": "search_docs",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "evaluated_permission": "allow",
+      "evaluation": {
+        "type": "auto",
+        "evaluated_permission": {
+          "type": "allow"
+        }
+      },
+      "session_thread_id": null
+    },
+    {
+      "type": "agent.tool_use",
+      "id": "sevt_01ExampleEvent000000048",
+      "input": {},
+      "name": "edit",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "evaluated_permission": "ask",
+      "evaluation": {
+        "type": "always_ask"
+      },
+      "session_thread_id": null
+    },
+    {
+      "type": "user.define_outcome",
+      "id": "sevt_01ExampleEvent000000049",
+      "description": "Produce report.md",
+      "max_iterations": null,
+      "outcome_id": "outc_01ExampleOutcome000001",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "rubric": {
+        "type": "file",
+        "file_id": "file_01ExampleRubric000000000"
+      }
+    }
+  ],
+  "next_page": null
+}

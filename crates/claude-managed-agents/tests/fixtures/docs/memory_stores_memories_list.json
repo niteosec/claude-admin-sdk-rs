@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "type": "memory",
+      "id": "mem_01ExampleMemory0000000",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "content_size_bytes": 27,
+      "created_at": "2026-09-19T10:00:00Z",
+      "memory_store_id": "memstore_01ExampleStore000000",
+      "memory_version_id": "memver_01ExampleVersion00000",
+      "path": "/preferences/format.md",
+      "updated_at": "2026-09-19T10:05:00Z",
+      "content": "Prefers tables over bullets."
+    },
+    {
+      "type": "memory_prefix",
+      "path": "/projects/"
+    }
+  ],
+  "next_page": null
+}

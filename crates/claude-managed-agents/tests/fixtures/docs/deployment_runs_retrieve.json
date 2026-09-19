@@ -1,0 +1,19 @@
+{
+  "type": "deployment_run",
+  "id": "drun_01ExampleRun0000000002",
+  "agent": {
+    "type": "agent",
+    "id": "agent_01ExampleAgent000000000",
+    "version": 3
+  },
+  "created_at": "2026-09-19T10:05:00Z",
+  "deployment_id": "depl_01ExampleDeployment000",
+  "error": {
+    "type": "session_rate_limited_error",
+    "message": "Rate limited."
+  },
+  "session_id": null,
+  "trigger_context": {
+    "type": "manual"
+  }
+}

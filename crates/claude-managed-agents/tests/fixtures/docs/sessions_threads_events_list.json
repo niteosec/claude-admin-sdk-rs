@@ -1,0 +1,103 @@
+{
+  "data": [
+    {
+      "type": "user.message",
+      "id": "sevt_01ExampleEvent000000001",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "base64",
+            "data": "iVBORw0KGgo=",
+            "media_type": "image/png"
+          }
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "url",
+            "url": "https://example.com/image.png"
+          }
+        },
+        {
+          "type": "image",
+          "source": {
+            "type": "file",
+            "file_id": "file_01ExampleFile0000000000"
+          }
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "base64",
+            "data": "JVBERi0=",
+            "media_type": "application/pdf"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "text",
+            "data": "Plain text.",
+            "media_type": "text/plain"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "url",
+            "url": "https://example.com/doc.pdf"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "document",
+          "source": {
+            "type": "file",
+            "file_id": "file_01ExampleFile0000000000"
+          },
+          "context": "Example context.",
+          "title": "Example document"
+        },
+        {
+          "type": "redacted"
+        }
+      ],
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "agent.message",
+      "id": "sevt_01ExampleEvent000000008",
+      "content": [
+        {
+          "type": "text",
+          "text": "Where is order 1234?"
+        },
+        {
+          "type": "redacted"
+        }
+      ],
+      "processed_at": "2026-09-19T10:00:00Z"
+    },
+    {
+      "type": "session.thread_status_idle",
+      "id": "sevt_01ExampleEvent000000040",
+      "agent_name": "Researcher",
+      "processed_at": "2026-09-19T10:00:00Z",
+      "session_thread_id": "sthr_01ExampleThread000000002",
+      "stop_reason": {
+        "type": "end_turn"
+      }
+    }
+  ],
+  "next_page": null
+}

@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "type": "dream",
+      "id": "dream_01ExampleDream00000000",
+      "archived_at": null,
+      "created_at": "2026-09-19T10:00:00Z",
+      "ended_at": "2026-09-19T10:10:00Z",
+      "error": null,
+      "inputs": [
+        {
+          "type": "memory_store",
+          "memory_store_id": "memstore_01ExampleStore000000"
+        },
+        {
+          "type": "sessions",
+          "session_ids": [
+            "sesn_01ExampleSession00000001",
+            "sesn_01ExampleSession00000002"
+          ]
+        }
+      ],
+      "instructions": "Merge duplicate preferences.",
+      "model": {
+        "id": "claude-opus-5",
+        "speed": "standard"
+      },
+      "output_behavior": {
+        "type": "create_new"
+      },
+      "outputs": [
+        {
+          "type": "memory_store",
+          "memory_store_id": "memstore_01ExampleStore000002"
+        }
+      ],
+      "session_id": "sesn_01ExampleSession00000003",
+      "status": "completed",
+      "usage": {
+        "cache_creation_input_tokens": 1,
+        "cache_read_input_tokens": 2,
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    },
+    {
+      "type": "dream",
+      "id": "dream_01ExampleDream00000001",
+      "archived_at": null,
+      "created_at": "2026-09-19T10:00:00Z",
+      "ended_at": "2026-09-19T10:05:00Z",
+      "error": {
+        "type": "example_error",
+        "message": "Example failure."
+      },
+      "inputs": [
+        {
+          "type": "memory_store",
+          "memory_store_id": "memstore_01ExampleStore000000"
+        },
+        {
+          "type": "sessions",
+          "session_ids": [
+            "sesn_01ExampleSession00000001",
+            "sesn_01ExampleSession00000002"
+          ]
+        }
+      ],
+      "instructions": null,
+      "model": {
+        "id": "claude-opus-5",
+        "speed": "standard"
+      },
+      "output_behavior": {
+        "type": "update_existing",
+        "memory_store_id": "memstore_01ExampleStore000000"
+      },
+      "outputs": [],
+      "session_id": null,
+      "status": "failed",
+      "usage": {
+        "cache_creation_input_tokens": 1,
+        "cache_read_input_tokens": 2,
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    }
+  ],
+  "next_page": null
+}

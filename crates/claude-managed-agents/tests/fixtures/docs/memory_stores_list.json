@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "type": "memory_store",
+      "id": "memstore_01ExampleStore000000",
+      "created_at": "2026-09-19T10:00:00Z",
+      "name": "example-preferences",
+      "updated_at": "2026-09-19T10:05:00Z",
+      "archived_at": null,
+      "description": "Example user preferences.",
+      "metadata": {
+        "owner": "example"
+      }
+    },
+    {
+      "type": "memory_store",
+      "id": "memstore_01ExampleStore000001",
+      "created_at": "2026-09-19T10:00:00Z",
+      "name": "example-preferences",
+      "updated_at": "2026-09-19T10:05:00Z",
+      "archived_at": "2026-09-19T10:10:00Z",
+      "description": "",
+      "metadata": {}
+    }
+  ],
+  "next_page": null
+}

@@ -1,0 +1,12 @@
+{
+  "type": "github_repository",
+  "id": "sesrsc_01ExampleResource00001",
+  "created_at": "2026-09-19T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "updated_at": "2026-09-19T10:05:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "type": "branch",
+    "name": "main"
+  }
+}

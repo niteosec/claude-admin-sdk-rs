@@ -8,16 +8,30 @@
 //! environments and deployments that run it; and the sessions, memory and runs it produces. This
 //! crate reads that estate. It never creates, updates, archives or deletes anything.
 //!
-//! Every request carries the `managed-agents-2026-04-01` beta header. Resources belong to a
-//! workspace: a key bound to one workspace needs nothing more, and a key that spans several selects
-//! one with [`ManagedAgentsClient::in_workspace`].
+//! Requests carry the `managed-agents-2026-04-01` beta header, plus the extra beta an endpoint family
+//! documents (tunnels, user profiles, dreams). Memory-store requests are the exception: they send
+//! `agent-memory-2026-07-22` *instead*, because the API rejects the two together with a 400.
+//! Resources belong to a workspace: a key bound to one workspace needs nothing more, and a key that
+//! spans several selects one with [`ManagedAgentsClient::in_workspace`].
+//!
+//! # Sensitive data
+//!
+//! Session events, thread events, memories and memory versions carry conversation content, tool
+//! inputs and outputs, and whatever the agent wrote to memory. Nothing is masked by the API. Treat
+//! them like transcripts. Vault credential reads never return secret values, and this crate masks
+//! token-like fields in `Debug` output regardless.
 //!
 //! *Built from Anthropic's API reference (fetched 2026-09-19); not yet verified against a live
 //! workspace.*
 
 mod agents;
 mod config_support;
+mod deployments;
+mod dreams;
 mod environments;
+mod memory;
+mod runtime;
+mod sessions;
 mod skills;
 mod tunnels;
 mod user_profiles;
@@ -58,7 +72,54 @@ pub use claude_api_core::{
     Error, KeyKind, PageToken, RateLimit, RequestOptions, ResponseMeta, Result, RetryPolicy, TokenPage,
 };
 
-/// The beta every Managed Agents endpoint requires.
+pub use deployments::{
+    Deployment, DeploymentAgentRef, DeploymentDefineOutcome, DeploymentErrorType, DeploymentFileConfig,
+    DeploymentGitHubRepositoryConfig, DeploymentInitialEvent, DeploymentMemoryStoreConfig, DeploymentPausedByError,
+    DeploymentPausedReason, DeploymentPausedReasonError, DeploymentResourceConfig, DeploymentRun, DeploymentRunError,
+    DeploymentRunStream, DeploymentSchedule, DeploymentScheduleTrigger, DeploymentStatus, DeploymentStream,
+    DeploymentSystemMessage, DeploymentTriggerContext, DeploymentTriggerType, DeploymentUserMessage,
+    ListDeploymentRuns, ListDeployments,
+};
+pub use dreams::{
+    DREAMING_BETA, Dream, DreamError, DreamInput, DreamMemoryStoreRef, DreamModelConfig, DreamOutput,
+    DreamOutputBehavior, DreamSessionsInput, DreamStatus, DreamStream, DreamUsage, ListDreams,
+};
+pub use memory::{
+    AGENT_MEMORY_BETA, GetMemory, GetMemoryVersion, ListMemories, ListMemoryStores, ListMemoryVersions, Memory,
+    MemoryActor, MemoryApiActor, MemoryListItem, MemoryListItemStream, MemoryPrefix, MemoryServiceAccountActor,
+    MemorySessionActor, MemoryStore, MemoryStoreStream, MemoryUserActor, MemoryVersion, MemoryVersionOperation,
+    MemoryVersionStream, MemoryView,
+};
+pub use runtime::RuntimePage;
+pub use sessions::{
+    ListSessionEvents, ListSessionResources, ListSessionThreadEvents, ListSessionThreads, ListSessions, Session,
+    SessionAdvisor, SessionAgent, SessionAgentCustomToolUseEvent, SessionAgentMcpToolResultEvent,
+    SessionAgentMcpToolUseEvent, SessionAgentMessageEvent, SessionAgentTool, SessionAgentToolConfig,
+    SessionAgentToolResultEvent, SessionAgentToolUseEvent, SessionAgentToolset, SessionAutoEvaluation,
+    SessionAutoJudgement, SessionBase64Source, SessionBasicEvent, SessionBranchCheckout, SessionBudget,
+    SessionBuiltinToolConfig, SessionCacheCreationUsage, SessionCheckout, SessionCommitCheckout, SessionContentBlock,
+    SessionCredentialErrorDetail, SessionCurrency, SessionCustomTool, SessionCustomToolInputSchema,
+    SessionDefineOutcomeEvent, SessionDocumentBlock, SessionDocumentSource, SessionEffort, SessionErrorDetail,
+    SessionErrorEvent, SessionEvaluatedPermission, SessionEvent, SessionEventError, SessionEventStream,
+    SessionFileResource, SessionFileSource, SessionGitHubRepositoryResource, SessionImageBlock, SessionImageSource,
+    SessionJudgementReason, SessionMcpErrorDetail, SessionMcpServer, SessionMcpToolConfig, SessionMcpToolset,
+    SessionMemoryStoreAccess, SessionMemoryStoreResource, SessionModelConfig, SessionModelRequestEndEvent,
+    SessionModelSpeed, SessionModelUsage, SessionMonetaryAmount, SessionMultiagent, SessionOrder,
+    SessionOutcomeEvaluation, SessionOutcomeEvaluationEndEvent, SessionOutcomeEvaluationProgressEvent,
+    SessionOutcomeResult, SessionPage, SessionPermissionPolicy, SessionRequiresAction, SessionResource,
+    SessionResourceStream, SessionRetryStatus, SessionRosterAgent, SessionRubric, SessionSearchResultBlock,
+    SessionSearchResultCitations, SessionServerToolUsage, SessionSkill, SessionSkillVersion, SessionStats,
+    SessionStatus, SessionStatusIdleEvent, SessionStopReason, SessionStream, SessionSystemMessageEvent,
+    SessionTextBlock, SessionTextContent, SessionTextRubric, SessionThread, SessionThreadAgent,
+    SessionThreadLifecycleEvent, SessionThreadMessageReceivedEvent, SessionThreadMessageSentEvent, SessionThreadStats,
+    SessionThreadStatus, SessionThreadStatusIdleEvent, SessionThreadStream, SessionToolConfirmationResult,
+    SessionToolDefaultConfig, SessionToolEvaluation, SessionUpdatedEvent, SessionUrlSource, SessionUsage,
+    SessionUsageEvent, SessionUserCustomToolResultEvent, SessionUserInterruptEvent, SessionUserLocation,
+    SessionUserMessageEvent, SessionUserToolConfirmationEvent, SessionUserToolResultEvent, SessionWebFetchToolConfig,
+    SessionWebSearchToolConfig,
+};
+
+/// The beta the Managed Agents endpoints require (memory stores use their own; see the crate docs).
 pub const MANAGED_AGENTS_BETA: &str = "managed-agents-2026-04-01";
 
 /// Client for the Managed Agents API.

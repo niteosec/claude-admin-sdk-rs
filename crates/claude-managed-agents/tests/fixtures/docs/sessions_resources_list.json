@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "type": "github_repository",
+      "id": "sesrsc_01ExampleResource00001",
+      "created_at": "2026-09-19T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "updated_at": "2026-09-19T10:05:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "type": "branch",
+        "name": "main"
+      }
+    },
+    {
+      "type": "github_repository",
+      "id": "sesrsc_01ExampleResource00002",
+      "created_at": "2026-09-19T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "updated_at": "2026-09-19T10:05:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "type": "commit",
+        "sha": "0123456789abcdef0123456789abcdef01234567"
+      }
+    },
+    {
+      "type": "file",
+      "id": "sesrsc_01ExampleResource00003",
+      "created_at": "2026-09-19T10:00:00Z",
+      "file_id": "file_01ExampleFile0000000000",
+      "mount_path": "/mnt/session/uploads/file_01ExampleFile0000000000",
+      "updated_at": "2026-09-19T10:05:00Z"
+    },
+    {
+      "type": "memory_store",
+      "memory_store_id": "memstore_01ExampleStore000000",
+      "access": "read_write",
+      "description": "Example preferences.",
+      "instructions": "Check before answering.",
+      "mount_path": "/mnt/memory/example-preferences",
+      "name": "example-preferences"
+    }
+  ],
+  "next_page": null
+}

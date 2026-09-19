@@ -1,8 +1,8 @@
 # claude-admin-sdk-rs
 
 **Unofficial, read-only Rust clients for Anthropic's organization-level Claude APIs**: the
-Compliance API, the Claude Enterprise Analytics API, the Admin API, and the receiving side of
-inference hooks.
+Compliance API, the Claude Enterprise Analytics API, the Admin API, the Managed Agents API, and the
+receiving side of inference hooks.
 
 > This project is not affiliated with or endorsed by Anthropic. "Claude" and "Anthropic" are
 > trademarks of Anthropic.
@@ -15,10 +15,12 @@ inference hooks.
 | [`claude-compliance`](crates/claude-compliance) | [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api): Activity Feed, directory and effective settings, chats, files, artifacts, projects, Code Artifacts, local and remote sessions |
 | [`claude-analytics`](crates/claude-analytics) | [Claude Enterprise Analytics API](https://platform.claude.com/docs/en/manage-claude/analytics-api): summaries, usage and cost reports, users, skills, connectors, chat projects, plugins, artifacts |
 | [`claude-admin`](crates/claude-admin) | [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api): organization, users, invites, workspaces, API keys, rate limits, usage and cost reports, RBAC, spend limits, external keys |
+| [`claude-managed-agents`](crates/claude-managed-agents) | [Managed Agents API](https://platform.claude.com/docs/en/managed-agents/overview) (beta): agents and versions (tools, MCP servers, skills, permission policies), skills, vaults and credentials, environments, user profiles, MCP tunnels, sessions with events, resources and threads, deployments and runs, memory stores, dreams |
 | [`claude-inference-hooks`](crates/claude-inference-hooks) | [Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks): request and verdict types, Standard Webhooks signature verification. No HTTP framework dependency |
 
 **Read-only by design.** Only GET endpoints are implemented. The Compliance API's permanent DELETE
-endpoints and every Admin API write (create, update, archive, approve, …) are deliberately absent, so a
+endpoints, every Admin API write (create, update, archive, approve, …) and every Managed Agents write
+are deliberately absent, so a
 key handed to software built on these crates cannot change or destroy anything through them.
 
 ## Verification status
@@ -37,9 +39,11 @@ unions, and an `extra` map on records for undocumented fields.
 | Analytics API | Analytics key, `read:analytics` (Enterprise) | 📄 built from the API reference |
 | Admin API: organization, users, rate limits, compliance settings | Admin API key | ◐ partly exercised live (2026-09-17, raw HTTP); client built from the API reference |
 | Admin API: everything else implemented | Admin API key | 📄 built from the API reference |
+| Managed Agents API | Claude API key (workspace-scoped; `anthropic-workspace-id` for multi-workspace keys) | 📄 built from the API reference (2026-09-19) |
 | Inference hooks | Signing secret (Enterprise, beta) | 📄 built from the documentation; signatures tested against independently computed HMAC vectors |
 | Admin API: service accounts, federation | OAuth token with `org:admin` | **not implemented**: the transport authenticates with API keys only |
-| Admin API: MCP tunnels | Required beta header, deprecated | **not implemented** |
+| Admin API: MCP tunnels (`/v1/organizations/mcp_tunnels`) | Required beta header, deprecated | **not implemented**; the successor `/v1/tunnels` is in `claude-managed-agents` |
+| Managed Agents: SSE event streams, self-hosted worker protocol (`environments/work`) | — | **not implemented**: not inventory |
 | Compliance DELETE endpoints, Admin API writes | — | **never implemented** |
 
 "Built from the API reference" means the pages at `platform.claude.com/docs/en/api/…` as fetched on

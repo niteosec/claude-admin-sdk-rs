@@ -85,6 +85,23 @@ live capture exists.
 | Service accounts, federation | "Requires an OAuth access token with the `org:admin` scope … Admin API keys are not accepted." | Not implemented. |
 | MCP tunnels | Deprecated in favour of `/v1/tunnels`; the `anthropic-beta` header is required. | Not implemented. |
 
+### Managed Agents API (fetched 2026-09-19)
+
+| Where | Inconsistency | Resolution |
+|---|---|---|
+| `managed-agents/memory` vs `managed-agents/dreams` | The memory guide and every memory reference page send `agent-memory-2026-07-22` alone and say sending it with `managed-agents-2026-04-01` returns a 400; the dreams guide says memory-store calls need only `managed-agents`. | Memory calls send `agent-memory-2026-07-22` alone. |
+| `dreams/list` vs the dreams guide | The example sends only `dreaming-2026-04-21`; the guide sends it with `managed-agents`. | Both sent. |
+| Skills pages | No beta is required, and the pages warn that `skills-2025-10-02` switches version addressing to Unix epoch timestamps. | Not sent. |
+| `user_profiles/*` | The examples send `user-profiles-2026-08-18`; the prose ties `external_id` to the 03-24 and 08-18 betas and `external_user_details` to 09-04, yet the example returns both. | `user-profiles-2026-08-18` sent; both fields optional. |
+| `managed-agents/agent-setup` vs `agents/retrieve` | The guide's toolset response has no `configs` and no `default_config.enabled`; the reference marks both required. | `configs` defaults to empty; `enabled` is optional. |
+| `vaults/list`, `vaults/credentials/list`, session and memory lists | `data` documented as optional. | Page types default `data` to empty. |
+| `deployments/list` | The example has `paused_reason: manual` with `status: active`, though the field is "non-null exactly when paused". | Both kept as received. |
+| `deployment_runs/*` | The example sets both `error` and `session_id`, though "exactly one" is documented. | Both optional. |
+| `memory_stores/memory_versions/*` | Examples set `redacted_at` while content and path are non-null, though both are documented as null once redacted. | All optional. |
+| `sessions/threads/*` | The thread agent field describes three kinds of agent but documents two variants. | Unknown kinds fall to `Other`. |
+| `sessions/resources/retrieve` | A `memory_store` resource has no `id`, yet resources are retrieved by ID. | Kept as documented. |
+| List query parameters | `statuses` and `types` are documented as "repeat the parameter" without brackets, unlike `name[]` elsewhere. | Sent as repeated bare keys. |
+
 ### Inference hooks
 
 | Where | Inconsistency | Resolution |

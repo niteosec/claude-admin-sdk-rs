@@ -24,3 +24,10 @@
   the deprecated MCP tunnel endpoints are not implemented. Built from the API reference.
 - `claude-inference-hooks`: request and verdict types, Standard Webhooks signature verification with
   secret rotation and timestamp tolerance. Built from the documentation.
+- `claude-api-core`: `ClientConfig::with_beta` and `RequestOptions` (per-request `anthropic-beta`
+  values and `anthropic-workspace-id`); header values are validated and the API key header is marked
+  sensitive.
+- `claude-admin`: the `speeds[]` filter and `group_by=speed` send the `fast-mode-2026-02-01` beta.
+- `claude-managed-agents`: 41 read-only Managed Agents endpoints (agents, skills, vaults,
+  environments, user profiles, tunnels, sessions, deployments, memory stores, dreams) with the
+  documented per-family beta headers. Built from the API reference.

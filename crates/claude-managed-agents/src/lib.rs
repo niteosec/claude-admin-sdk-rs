@@ -15,6 +15,44 @@
 //! *Built from Anthropic's API reference (fetched 2026-09-19); not yet verified against a live
 //! workspace.*
 
+mod agents;
+mod config_support;
+mod environments;
+mod skills;
+mod tunnels;
+mod user_profiles;
+mod vaults;
+
+pub use agents::{
+    Agent, AgentAdvisor, AgentBuiltinToolConfig, AgentCoordinator, AgentCustomTool, AgentCustomToolInputSchema,
+    AgentEffort, AgentMcpServer, AgentMcpServerUrl, AgentMcpToolConfig, AgentMcpToolset, AgentModelConfig,
+    AgentMultiagent, AgentPermissionPolicy, AgentReference, AgentRosterEntry, AgentSkill, AgentSkillReference,
+    AgentSpeed, AgentStream, AgentTool, AgentToolConfig, AgentToolset, AgentToolsetDefaultConfig, AgentUserLocation,
+    AgentWebFetchToolConfig, AgentWebSearchToolConfig, ListAgentVersions, ListAgents,
+};
+pub use environments::{
+    Environment, EnvironmentCloudConfig, EnvironmentConfig, EnvironmentLimitedNetwork, EnvironmentNetworking,
+    EnvironmentPackages, EnvironmentScope, EnvironmentStream, ListEnvironments,
+};
+pub use skills::{
+    ListSkillVersions, ListSkills, Skill, SkillSource, SkillSourceType, SkillStream, SkillVersion, SkillVersionStream,
+};
+pub use tunnels::{
+    ListTunnelCertificates, ListTunnels, MCP_TUNNELS_BETA, Tunnel, TunnelCertificate, TunnelCertificateStream,
+    TunnelStream,
+};
+pub use user_profiles::{
+    ListUserProfiles, USER_PROFILES_BETA, UserProfile, UserProfileAccessType, UserProfileAccountStatus,
+    UserProfileEntityType, UserProfileExternalUserDetails, UserProfileOrder, UserProfileOrderBy, UserProfileStream,
+    UserProfileTrustGrant, UserProfileTrustGrantStatus,
+};
+pub use vaults::{
+    ListVaultCredentials, ListVaults, Vault, VaultCredential, VaultCredentialAuth, VaultCredentialEnvironmentVariable,
+    VaultCredentialInjectionLocation, VaultCredentialLimitedNetworking, VaultCredentialMcpOAuth,
+    VaultCredentialNetworking, VaultCredentialOAuthRefresh, VaultCredentialPage, VaultCredentialStaticBearer,
+    VaultCredentialStream, VaultCredentialTokenEndpointAuth, VaultPage, VaultStream,
+};
+
 pub use claude_api_core::{
     ApiClient, ApiError, ApiErrorKind, ApiKey, ApiResponse, ByteStream, ClientConfig, Cursor, CursorPage, Download,
     Error, KeyKind, PageToken, RateLimit, RequestOptions, ResponseMeta, Result, RetryPolicy, TokenPage,

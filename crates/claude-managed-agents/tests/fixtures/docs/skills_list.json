@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "type": "skill",
+      "id": "skill_01ExampleSkill00000000",
+      "created_at": "2026-03-15T10:00:00Z",
+      "display_name": "Example Skill",
+      "latest_version_id": "skillver_01ExampleVersion00002",
+      "source": {
+        "type": "custom"
+      },
+      "updated_at": "2026-03-16T10:00:00Z"
+    },
+    {
+      "type": "skill",
+      "id": "xlsx",
+      "created_at": "2026-03-15T10:00:00Z",
+      "display_name": "Excel",
+      "latest_version_id": "skillver_01ExampleVersion00003",
+      "source": {
+        "type": "anthropic"
+      },
+      "updated_at": "2026-03-16T10:00:00Z"
+    },
+    {
+      "type": "skill",
+      "id": "skill_01ExampleSkill00000003",
+      "created_at": "2026-03-15T10:00:00Z",
+      "display_name": "Sample",
+      "latest_version_id": "skillver_01ExampleVersion00002",
+      "source": {
+        "type": "anthropic_example"
+      },
+      "updated_at": "2026-03-16T10:00:00Z"
+    },
+    {
+      "type": "skill",
+      "id": "skill_01ExampleSkill00000004",
+      "created_at": "2026-03-15T10:00:00Z",
+      "display_name": "Plugin Skill",
+      "latest_version_id": "skillver_01ExampleVersion00002",
+      "source": {
+        "type": "plugin"
+      },
+      "updated_at": "2026-03-16T10:00:00Z"
+    }
+  ],
+  "next_page": null
+}

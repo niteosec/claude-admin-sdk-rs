@@ -1,0 +1,223 @@
+{
+  "data": [
+    {
+      "type": "agent",
+      "id": "agent_01ExampleAgent0000000001",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "type": "url",
+          "name": "example-mcp",
+          "url": "https://mcp.example.com/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-opus-5",
+        "effort": {
+          "type": "high"
+        },
+        "inference_geo": "inference_geo",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "type": "coordinator",
+        "agents": [
+          {
+            "type": "agent",
+            "id": "agent_01ExampleAgent0000000002",
+            "version": 1
+          },
+          {
+            "type": "advisor",
+            "model": "claude-example-advisor"
+          }
+        ]
+      },
+      "name": "Example Agent",
+      "skills": [
+        {
+          "type": "anthropic",
+          "skill_id": "xlsx",
+          "version": "1"
+        },
+        {
+          "type": "custom",
+          "skill_id": "skill_01ExampleSkill00000000",
+          "version": "2"
+        }
+      ],
+      "system": "You are an example agent.",
+      "tools": [
+        {
+          "type": "agent_toolset_20260401",
+          "configs": [
+            {
+              "type": "bash",
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            },
+            {
+              "type": "edit",
+              "enabled": true,
+              "name": "edit",
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            {
+              "type": "read",
+              "enabled": true,
+              "name": "read",
+              "permission_policy": {
+                "type": "auto"
+              }
+            },
+            {
+              "type": "write",
+              "enabled": true,
+              "name": "write",
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            {
+              "type": "glob",
+              "enabled": true,
+              "name": "glob",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            },
+            {
+              "type": "grep",
+              "enabled": true,
+              "name": "grep",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            },
+            {
+              "type": "web_fetch",
+              "enabled": true,
+              "name": "web_fetch",
+              "permission_policy": {
+                "type": "always_ask"
+              },
+              "allowed_domains": [
+                "docs.example.com"
+              ],
+              "blocked_domains": null,
+              "max_content_tokens": 10000
+            },
+            {
+              "type": "web_search",
+              "enabled": false,
+              "name": "web_search",
+              "permission_policy": {
+                "type": "auto"
+              },
+              "allowed_domains": null,
+              "blocked_domains": [
+                "blocked.example.com"
+              ],
+              "user_location": {
+                "type": "approximate",
+                "city": "Example City",
+                "country": "US",
+                "region": "Example Region",
+                "timezone": "America/Los_Angeles"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        },
+        {
+          "type": "mcp_toolset",
+          "configs": [
+            {
+              "enabled": true,
+              "name": "search_issues",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "mcp_server_name": "example-mcp"
+        },
+        {
+          "type": "custom",
+          "description": "Looks up an order.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "order_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id"
+            ]
+          },
+          "name": "lookup_order"
+        }
+      ],
+      "updated_at": "2026-03-16T10:00:00Z",
+      "version": 3
+    },
+    {
+      "type": "agent",
+      "id": "agent_01ExampleAgent0000000002",
+      "archived_at": "2026-04-01T00:00:00Z",
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": null,
+      "mcp_servers": [],
+      "metadata": {},
+      "model": {
+        "id": "claude-sonnet-5",
+        "effort": {
+          "type": "xhigh"
+        },
+        "inference_geo": null,
+        "speed": "fast"
+      },
+      "multiagent": null,
+      "name": "Minimal Agent",
+      "skills": [],
+      "system": null,
+      "tools": [
+        {
+          "type": "agent_toolset_20260401",
+          "configs": [],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "auto"
+            }
+          }
+        }
+      ],
+      "updated_at": "2026-03-16T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": null
+}

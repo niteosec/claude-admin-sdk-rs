@@ -1,0 +1,102 @@
+{
+  "data": [
+    {
+      "type": "user_profile",
+      "id": "uprof_01ExampleUserProfile00",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
+      "trust_grants": {
+        "cyber": {
+          "status": "active"
+        }
+      },
+      "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
+      "external_id": "user_12345",
+      "external_user_details": {
+        "account_status": "active",
+        "country": "US",
+        "email_hash": "email_hash",
+        "entity_type": "individual",
+        "name_hash": "name_hash",
+        "onboarded_at": "2026-01-01T00:00:00Z",
+        "reference_id": "reference_id"
+      },
+      "external_user_onboarded_at": "2026-01-01T00:00:00Z",
+      "name": "Example User"
+    },
+    {
+      "type": "user_profile",
+      "id": "uprof_01ExampleUserProfile02",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {
+        "tier": "gold"
+      },
+      "trust_grants": {
+        "cyber": {
+          "status": "pending"
+        },
+        "bio": {
+          "status": "rejected"
+        }
+      },
+      "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "passthrough",
+      "external_id": null,
+      "external_user_details": {
+        "account_status": "suspended",
+        "country": null,
+        "email_hash": null,
+        "entity_type": "business",
+        "name_hash": null,
+        "onboarded_at": null,
+        "reference_id": null
+      },
+      "external_user_onboarded_at": null,
+      "name": "Example Company"
+    },
+    {
+      "type": "user_profile",
+      "id": "uprof_01ExampleUserProfile03",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
+      "trust_grants": {},
+      "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": null,
+      "external_id": null,
+      "external_user_details": {
+        "account_status": "blocked",
+        "country": null,
+        "email_hash": null,
+        "entity_type": "non_profit",
+        "name_hash": null,
+        "onboarded_at": null,
+        "reference_id": null
+      },
+      "external_user_onboarded_at": null,
+      "name": null
+    },
+    {
+      "type": "user_profile",
+      "id": "uprof_01ExampleUserProfile04",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
+      "trust_grants": {},
+      "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": null,
+      "external_id": null,
+      "external_user_details": {
+        "account_status": null,
+        "country": null,
+        "email_hash": null,
+        "entity_type": "government",
+        "name_hash": null,
+        "onboarded_at": null,
+        "reference_id": null
+      },
+      "external_user_onboarded_at": null,
+      "name": null
+    }
+  ],
+  "next_page": null
+}

@@ -1,0 +1,11 @@
+{
+  "type": "skill",
+  "id": "skill_01ExampleSkill00000000",
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example Skill",
+  "latest_version_id": "skillver_01ExampleVersion00002",
+  "source": {
+    "type": "custom"
+  },
+  "updated_at": "2026-03-16T10:00:00Z"
+}

@@ -43,7 +43,7 @@ unions, and an `extra` map on records for undocumented fields.
 | Inference hooks | Signing secret (Enterprise, beta) | 📄 built from the documentation; signatures tested against independently computed HMAC vectors |
 | Admin API: service accounts, federation | OAuth token with `org:admin` | **not implemented**: the transport authenticates with API keys only |
 | Admin API: MCP tunnels (`/v1/organizations/mcp_tunnels`) | Required beta header, deprecated | **not implemented**; the successor `/v1/tunnels` is in `claude-managed-agents` |
-| Managed Agents: SSE event streams, self-hosted worker protocol (`environments/work`) | — | **not implemented**: not inventory |
+| Managed Agents: SSE event streams, self-hosted worker protocol (`environments/work`) | — | **not implemented**: outside a read-only request/response client |
 | Compliance DELETE endpoints, Admin API writes | — | **never implemented** |
 
 "Built from the API reference" means the pages at `platform.claude.com/docs/en/api/…` as fetched on

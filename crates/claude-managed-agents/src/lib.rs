@@ -6,7 +6,7 @@
 //! Managed Agents are agents defined and run through the Claude API: an agent's model, system prompt,
 //! tools, MCP servers and skills; the vaults holding the credentials those tools use; the
 //! environments and deployments that run it; and the sessions, memory and runs it produces. This
-//! crate reads that estate. It never creates, updates, archives or deletes anything.
+//! crate reads them. It never creates, updates, archives or deletes anything.
 //!
 //! Requests carry the `managed-agents-2026-04-01` beta header, plus the extra beta an endpoint family
 //! documents (tunnels, user profiles, dreams). Memory-store requests are the exception: they send

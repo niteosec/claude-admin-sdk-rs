@@ -3,6 +3,7 @@
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
+use http::{HeaderMap, HeaderValue};
 use jiff::Timestamp;
 use serde::de::DeserializeOwned;
 use tracing::{debug, warn};
@@ -11,6 +12,7 @@ use url::Url;
 use crate::config::{ApiKey, ClientConfig, KeyKind};
 use crate::download::Download;
 use crate::error::{ErrorHeaders, api_error, excerpt};
+use crate::options::RequestOptions;
 use crate::path::ApiPath;
 use crate::response::{ApiResponse, RateLimit, ResponseMeta, header};
 use crate::{Error, Result};
@@ -72,7 +74,17 @@ impl ApiClient {
         path: &ApiPath,
         query: &[(&str, String)],
     ) -> Result<ApiResponse<T>> {
-        let (response, meta) = self.get(path, query, "application/json").await?;
+        self.get_json_with(path, query, &RequestOptions::default()).await
+    }
+
+    /// [`Self::get_json`] with per-request headers.
+    pub async fn get_json_with<T: DeserializeOwned>(
+        &self,
+        path: &ApiPath,
+        query: &[(&str, String)],
+        options: &RequestOptions,
+    ) -> Result<ApiResponse<T>> {
+        let (response, meta) = self.get(path, query, "application/json", options).await?;
         let body = response.bytes().await?;
         match serde_json::from_slice(&body) {
             Ok(body) => Ok(ApiResponse { body, meta }),
@@ -82,7 +94,17 @@ impl ApiClient {
 
     /// `GET path?query` for a binary body, with throttling and retries up to the response headers.
     pub async fn get_download(&self, path: &ApiPath, query: &[(&str, String)]) -> Result<Download> {
-        let (response, meta) = self.get(path, query, "*/*").await?;
+        self.get_download_with(path, query, &RequestOptions::default()).await
+    }
+
+    /// [`Self::get_download`] with per-request headers.
+    pub async fn get_download_with(
+        &self,
+        path: &ApiPath,
+        query: &[(&str, String)],
+        options: &RequestOptions,
+    ) -> Result<Download> {
+        let (response, meta) = self.get(path, query, "*/*", options).await?;
         Ok(Download::new(meta, response))
     }
 
@@ -92,20 +114,15 @@ impl ApiClient {
         path: &ApiPath,
         query: &[(&str, String)],
         accept: &'static str,
+        options: &RequestOptions,
     ) -> Result<(reqwest::Response, ResponseMeta)> {
         let url = self.url(path, query)?;
+        let headers = self.headers(accept, options)?;
         let retry = &self.config.retry;
         let mut attempt = 0u32;
         loop {
             self.throttle().await;
-            let outcome = self
-                .http
-                .get(url.clone())
-                .header("x-api-key", self.key.expose())
-                .header("anthropic-version", &self.config.anthropic_version)
-                .header(reqwest::header::ACCEPT, accept)
-                .send()
-                .await;
+            let outcome = self.http.get(url.clone()).headers(headers.clone()).send().await;
 
             let response = match outcome {
                 Ok(response) => response,
@@ -146,6 +163,31 @@ impl ApiClient {
             }
             return Err(error.into());
         }
+    }
+
+    fn headers(&self, accept: &'static str, options: &RequestOptions) -> Result<HeaderMap> {
+        fn value(name: &str, value: &str) -> Result<HeaderValue> {
+            HeaderValue::from_str(value).map_err(|_| Error::InvalidArgument(format!("invalid {name} header value")))
+        }
+        let mut headers = HeaderMap::new();
+        let mut key = value("x-api-key", self.key.expose())?;
+        key.set_sensitive(true);
+        headers.insert("x-api-key", key);
+        headers.insert("anthropic-version", value("anthropic-version", &self.config.anthropic_version)?);
+        headers.insert(reqwest::header::ACCEPT, HeaderValue::from_static(accept));
+        let mut betas: Vec<&str> = self.config.betas.iter().map(String::as_str).collect();
+        for beta in &options.betas {
+            if !betas.contains(&beta.as_str()) {
+                betas.push(beta);
+            }
+        }
+        if !betas.is_empty() {
+            headers.insert("anthropic-beta", value("anthropic-beta", &betas.join(","))?);
+        }
+        if let Some(workspace_id) = &options.workspace_id {
+            headers.insert("anthropic-workspace-id", value("anthropic-workspace-id", workspace_id)?);
+        }
+        Ok(headers)
     }
 
     fn url(&self, path: &ApiPath, query: &[(&str, String)]) -> Result<Url> {
@@ -217,6 +259,30 @@ mod tests {
         for id in ["", ".", ".."] {
             assert!(ApiPath::new("v1/x").id(id).is_err(), "{id:?}");
         }
+    }
+
+    #[test]
+    fn betas_merge_and_workspace_is_sent() {
+        let config = ClientConfig::default().with_beta("managed-agents-2026-04-01");
+        let client = ApiClient::with_config(ApiKey::new("k"), config).unwrap();
+        let options = RequestOptions::default()
+            .beta("fast-mode-2026-02-01")
+            .beta("managed-agents-2026-04-01")
+            .workspace_id("wrkspc_01Example");
+        let headers = client.headers("application/json", &options).unwrap();
+        assert_eq!(headers["anthropic-beta"], "managed-agents-2026-04-01,fast-mode-2026-02-01");
+        assert_eq!(headers["anthropic-workspace-id"], "wrkspc_01Example");
+        assert!(headers["x-api-key"].is_sensitive());
+
+        let plain = ApiClient::new(ApiKey::new("k")).unwrap().headers("*/*", &RequestOptions::default()).unwrap();
+        assert!(!plain.contains_key("anthropic-beta") && !plain.contains_key("anthropic-workspace-id"));
+    }
+
+    #[test]
+    fn header_injection_is_rejected() {
+        let client = ApiClient::new(ApiKey::new("k")).unwrap();
+        let options = RequestOptions::default().workspace_id("wrkspc\r\nx-evil: 1");
+        assert!(matches!(client.headers("*/*", &options), Err(Error::InvalidArgument(_))));
     }
 
     #[test]

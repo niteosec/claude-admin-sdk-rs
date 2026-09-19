@@ -93,9 +93,21 @@ pub struct ClientConfig {
     pub(crate) user_agent: String,
     pub(crate) timeout: Duration,
     pub(crate) retry: RetryPolicy,
+    pub(crate) betas: Vec<String>,
 }
 
 impl ClientConfig {
+    /// Adds an `anthropic-beta` value sent on every request, for example
+    /// `managed-agents-2026-04-01`. Per-request betas ([`RequestOptions::beta`](crate::RequestOptions::beta))
+    /// are sent in addition.
+    pub fn with_beta(mut self, beta: impl Into<String>) -> Self {
+        let beta = beta.into();
+        if !self.betas.contains(&beta) {
+            self.betas.push(beta);
+        }
+        self
+    }
+
     /// Overrides the API origin (tests, proxies).
     pub fn with_base_url(mut self, base_url: Url) -> Self {
         self.base_url = base_url;
@@ -136,6 +148,7 @@ impl Default for ClientConfig {
             user_agent: concat!("claude-admin-sdk-rs/", env!("CARGO_PKG_VERSION")).to_owned(),
             timeout: Duration::from_secs(60),
             retry: RetryPolicy::default(),
+            betas: Vec::new(),
         }
     }
 }

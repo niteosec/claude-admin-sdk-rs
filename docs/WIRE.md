@@ -80,7 +80,7 @@ live capture exists.
 | Where | Inconsistency | Resolution |
 |---|---|---|
 | `spend_limits/increase_requests/*` | Pages sit under `spend_limits/`; the documented path is `/v1/organizations/spend_limit_increase_requests`. | Documented path. |
-| `usage_report/retrieve_messages` | The `speeds[]` filter and `group_by=speed` need the `fast-mode-2026-02-01` beta header. | Setters exist and say so; the transport does not send beta headers. |
+| `usage_report/retrieve_messages` | The `speeds[]` filter and `group_by=speed` need the `fast-mode-2026-02-01` beta header. | The builder sends the beta header automatically when either is used. |
 | `rbac_groups/list` | The example shows `has_more: false` together with a non-null `next_page`. | `has_more: false` ends the walk. |
 | Service accounts, federation | "Requires an OAuth access token with the `org:admin` scope … Admin API keys are not accepted." | Not implemented. |
 | MCP tunnels | Deprecated in favour of `/v1/tunnels`; the `anthropic-beta` header is required. | Not implemented. |

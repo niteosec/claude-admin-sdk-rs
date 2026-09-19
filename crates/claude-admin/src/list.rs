@@ -3,7 +3,9 @@
 use std::pin::Pin;
 
 use async_stream::try_stream;
-use claude_api_core::{ApiClient, ApiPath, ApiResponse, Cursor, CursorPage, Error, PageToken, Result, TokenPage};
+use claude_api_core::{
+    ApiClient, ApiPath, ApiResponse, Cursor, CursorPage, Error, PageToken, RequestOptions, Result, TokenPage,
+};
 use futures_core::Stream;
 use serde::de::DeserializeOwned;
 
@@ -155,11 +157,20 @@ pub(crate) struct TokenList {
     limit: Option<u32>,
     page: Option<PageToken>,
     pub(crate) params: Params,
+    pub(crate) options: RequestOptions,
 }
 
 impl TokenList {
     pub(crate) fn new(api: ApiClient, path: Result<ApiPath>, max_limit: u32) -> Self {
-        Self { api, path: deferred(path), max_limit, limit: None, page: None, params: Params::default() }
+        Self {
+            api,
+            path: deferred(path),
+            max_limit,
+            limit: None,
+            page: None,
+            params: Params::default(),
+            options: RequestOptions::default(),
+        }
     }
 
     pub(crate) fn limit(&mut self, limit: u32) {
@@ -172,7 +183,7 @@ impl TokenList {
 
     pub(crate) async fn send<T: DeserializeOwned>(&self) -> Result<ApiResponse<TokenPage<T>>> {
         let path = self.path.clone().map_err(Error::InvalidArgument)?;
-        self.api.get_json(&path, &self.query()?).await
+        self.api.get_json_with(&path, &self.query()?, &self.options).await
     }
 
     pub(crate) fn stream<T: DeserializeOwned + Send + 'static>(self) -> RecordStream<T> {

@@ -110,9 +110,9 @@ pub use spend_limits::{
 };
 pub use usage::{
     BucketWidth, CacheCreation, ClaudeCodeActor, ClaudeCodeApiActor, ClaudeCodeUsage, ClaudeCodeUsageReport,
-    ClaudeCodeUserActor, ContextWindow, CoreMetrics, CustomerType, EstimatedCost, LinesOfCode, MessagesUsage,
-    MessagesUsageBucket, MessagesUsageReport, ModelTokens, ModelUsage, ServerToolUse, ServiceTier, Speed,
-    SubscriptionType, ToolActionCounts, UsageGroupBy, UsageInferenceGeo,
+    ClaudeCodeUserActor, ContextWindow, CoreMetrics, CustomerType, EstimatedCost, FAST_MODE_BETA, LinesOfCode,
+    MessagesUsage, MessagesUsageBucket, MessagesUsageReport, ModelTokens, ModelUsage, ServerToolUse, ServiceTier,
+    Speed, SubscriptionType, ToolActionCounts, UsageGroupBy, UsageInferenceGeo,
 };
 pub use users::{Invite, InviteStatus, ListInvites, ListUsers, OrganizationRole, User};
 pub use workspaces::{

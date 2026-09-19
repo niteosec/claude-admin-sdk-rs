@@ -89,6 +89,26 @@ async fn messages_usage_report_sends_every_documented_parameter() {
 }
 
 #[tokio::test]
+async fn speed_filters_send_the_fast_mode_beta_and_nothing_else_does() {
+    let server = MockServer::start().await;
+    Mock::given(path("/v1/organizations/usage_report/messages"))
+        .respond_with(ok(fixture("usage_report_messages")))
+        .mount(&server)
+        .await;
+    let client = client(&server);
+
+    client.messages_usage_report(at("2026-01-01T00:00:00Z")).speed(Speed::Fast).send().await.unwrap();
+    client.messages_usage_report(at("2026-01-01T00:00:00Z")).group_by(UsageGroupBy::Speed).send().await.unwrap();
+    client.messages_usage_report(at("2026-01-01T00:00:00Z")).group_by(UsageGroupBy::Model).send().await.unwrap();
+
+    let requests = server.received_requests().await.unwrap();
+    let beta = |i: usize| requests[i].headers.get("anthropic-beta").map(|value| value.to_str().unwrap().to_owned());
+    assert_eq!(beta(0).as_deref(), Some(claude_admin::FAST_MODE_BETA));
+    assert_eq!(beta(1).as_deref(), Some(claude_admin::FAST_MODE_BETA));
+    assert_eq!(beta(2), None);
+}
+
+#[tokio::test]
 async fn usage_stream_follows_next_page() {
     let server = MockServer::start().await;
     let report = fixture("usage_report_messages");

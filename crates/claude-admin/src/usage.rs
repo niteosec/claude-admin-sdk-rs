@@ -112,8 +112,7 @@ string_enum! {
         ServiceAccountId = "service_account_id",
         /// `service_tier`.
         ServiceTier = "service_tier",
-        /// `speed`. Documented as requiring the `fast-mode-2026-02-01` beta header, which this client
-        /// does not send.
+        /// `speed`. Sends the `fast-mode-2026-02-01` beta header the API requires for it.
         Speed = "speed",
         /// `workspace_id`.
         WorkspaceId = "workspace_id",
@@ -194,6 +193,9 @@ pub struct ServerToolUse {
     pub web_search_requests: u64,
 }
 
+/// The beta that enables the `speeds[]` filter and `group_by[]=speed`.
+pub const FAST_MODE_BETA: &str = "fast-mode-2026-02-01";
+
 /// Request builder for `GET /v1/organizations/usage_report/messages`.
 #[derive(Debug, Clone)]
 #[must_use = "a request does nothing until sent or streamed"]
@@ -238,8 +240,12 @@ impl MessagesUsageReport {
         self
     }
 
-    /// Adds a `group_by[]` dimension.
+    /// Adds a `group_by[]` dimension. Grouping by [`UsageGroupBy::Speed`] also sends the
+    /// `fast-mode-2026-02-01` beta header, which the API requires for it.
     pub fn group_by(mut self, dimension: UsageGroupBy) -> Self {
+        if dimension == UsageGroupBy::Speed {
+            self = self.fast_mode();
+        }
         self.inner.params.push("group_by[]", dimension.as_str());
         self
     }
@@ -268,10 +274,16 @@ impl MessagesUsageReport {
         self
     }
 
-    /// Adds a `speeds[]` filter. Documented as requiring the `fast-mode-2026-02-01` beta header,
-    /// which this client does not send.
+    /// Adds a `speeds[]` filter (Claude Code research preview). Also sends the
+    /// `fast-mode-2026-02-01` beta header, which the API requires for it.
     pub fn speed(mut self, speed: Speed) -> Self {
+        self = self.fast_mode();
         self.inner.params.push("speeds[]", speed.as_str());
+        self
+    }
+
+    fn fast_mode(mut self) -> Self {
+        self.inner.options = std::mem::take(&mut self.inner.options).beta(FAST_MODE_BETA);
         self
     }
 
